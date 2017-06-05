@@ -36,7 +36,7 @@ class UserController extends \yii\web\Controller
     public function actionUpdate($id)
     {
   
-        $userModel= User::find($id);
+        $userModel= User::findOne($id);
         $userModel->updated_at= time();
         $userModel->auth_key= \Yii::$app->security->generateRandomString();
         if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
