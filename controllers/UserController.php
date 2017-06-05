@@ -2,55 +2,70 @@
 
 namespace app\controllers;
 use app\models\User;
+use yii\data\ActiveDataProvider;
+use app\controllers;
 
 class UserController extends \yii\web\Controller
 {
-    public function actionIndex()
+    
+    
+    public function actionList()
     {
-//        return $this->render('index');
-        $userModel= User::find()->all();
-      
-        var_dump($userModel);
+        $dataProvider= new ActiveDataProvider([
+            'query'=>User::find(),
+            'pagination' => [ 'pageSize' => 3 ]
+        ]);
+        
+        
+        return $this->render('list',[
+            'dataProvider'=>$dataProvider
+        ]);
+        
     }
     
     
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        $userModel= User::findOne(5);
-        $userModel->delete();
+        $userModel= User::find($id);
+        $userModel->delete;
+        $this->render('list');
     }
     
     
     
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
-        $userModel= User::findOne(5);
-        $userModel->username="aaaaaaasss";
-        $userModel->email="gkgkgkgkgkgk";
-        $userModel->password_hash="lklkm";
-        $userModel->status=0;
-        $userModel->auth_key="vfdv";
-        $userModel->created_at="123321";
-        $userModel->updated_at="3212332";
-        $userModel->save();
-        var_dump($userModel);
+  
+        $userModel= User::find($id);
+        $userModel->updated_at= time();
+        $userModel->auth_key= \Yii::$app->security->generateRandomString();
+        if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
+            $userModel->save();
+           $this->redirect('list');
+        }
+      return  $this->render('update',[
+          'userModel'=>$userModel
+      ]);
+
         
     }
     
     
     public function actionCreate()
     {
-        $userModel= new \app\models\User;
-        $userModel->username="aref";
-        $userModel->email="kjvc;kjenv;js";
-        $userModel->password_hash="aaaaaa";
-         $userModel->status=1;
-        $userModel->auth_key="dv";
-        $userModel->created_at="123321";
-        $userModel->updated_at="3212332";
-        $userModel->save();
-        var_dump($userModel);
-        
+        $userModel= new User;
+        $userModel->created_at= time();
+        $userModel->updated_at= time();
+        $userModel->auth_key= \Yii::$app->security->generateRandomString();
+        if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
+            $userModel->save();
+           $this->redirect('list');
+        }
+ 
+      echo  $this->render('create',[
+            'userModel'=>$userModel
+        ]);
+ 
         
     }
 
