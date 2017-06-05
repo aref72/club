@@ -10,7 +10,7 @@ $form= ActiveForm::begin()
 <?= $form->field($userModel,'email') ?>
 <?= $form->field($userModel,'status')->checkbox() ?>
  
-<?= Html::submitButton('ایجاد', ['class' => 'btn btn-sm btn-primary']) ?>
+<?= Html::submitButton(($userModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-primary']) ?>
    
 <?php ActiveForm::end();
 ?>
