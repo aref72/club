@@ -3,7 +3,7 @@
 namespace app\controllers;
 use app\models\User;
 use yii\data\ActiveDataProvider;
-use app\controllers;
+
 
 class UserController extends \yii\web\Controller
 {
@@ -26,9 +26,9 @@ class UserController extends \yii\web\Controller
     
     public function actionDelete($id)
     {
-        $userModel= User::find($id);
-        $userModel->delete;
-        $this->render('list');
+        $userModel= User::findOne($id);
+        $userModel->delete();
+        $this->redirect(['list']);
     }
     
     
@@ -41,7 +41,7 @@ class UserController extends \yii\web\Controller
         $userModel->auth_key= \Yii::$app->security->generateRandomString();
         if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
             $userModel->save();
-           $this->redirect('list');
+           $this->redirect(['list']);
         }
       return  $this->render('update',[
           'userModel'=>$userModel
@@ -59,10 +59,10 @@ class UserController extends \yii\web\Controller
         $userModel->auth_key= \Yii::$app->security->generateRandomString();
         if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
             $userModel->save();
-           $this->redirect('list');
+           $this->redirect(['list']);
         }
  
-      echo  $this->render('create',[
+      return $this->render('create',[
             'userModel'=>$userModel
         ]);
  
