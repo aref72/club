@@ -23,6 +23,7 @@ class m141022_115823_create_user_table extends Migration
             'account_activation_token' => $this->string(),          
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+            'level' => $this->integer()->notNull(),
         ], $tableOptions);
         
         $this->insert("{{%user}}", [
@@ -33,6 +34,17 @@ class m141022_115823_create_user_table extends Migration
             'auth_key' => Yii::$app->security->generateRandomString(),
             'created_at' => time(),
             'updated_at' => time(),
+            'level' => 1,
+        ]);
+        $this->insert("{{%user}}", [
+            'username' => 'aref',
+            'password_hash' => Yii::$app->security->generatePasswordHash("123456"),
+            'email' => 'rf.mohammadzade.am@gmail.com',
+            'status' => 1,
+            'auth_key' => Yii::$app->security->generateRandomString(),
+            'created_at' => time(),
+            'updated_at' => time(),
+            'level' => 1,
         ]);
     }
 
