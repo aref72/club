@@ -3,11 +3,33 @@
 namespace app\controllers;
 use app\models\User;
 use yii\data\ActiveDataProvider;
-
+use Yii;
 
 class UserController extends \yii\web\Controller
 {
     
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['list', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['list', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'matchCallback' => function(){
+                           if(Yii::$app->user->identity->level != 1)
+                           {
+                               return false;
+                           }
+                           return true;
+                        },
+                        'roles' => ['@']
+                    ]
+                ]
+            ]
+        ];
+    }
     
     public function actionList()
     {
