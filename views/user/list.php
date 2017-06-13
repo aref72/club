@@ -5,7 +5,7 @@ $this->title='list';
 use yii\helpers\Html;
 
 ?>
-<?= Html::a('ثبت کاربر',['/UserController.php/create'],['class'=>'btn btn-success']) ?>
+<?= Html::a('ثبت کاربر', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
     'columns'=>[
