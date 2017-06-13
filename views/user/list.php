@@ -1,6 +1,11 @@
 <?php
 $this->title='list';
 ?>
+<?php
+use yii\helpers\Html;
+
+?>
+<?= Html::a('ثبت کاربر',['/UserController.php/create'],['class'=>'btn btn-success']) ?>
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
     'columns'=>[
