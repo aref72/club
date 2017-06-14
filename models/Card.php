@@ -34,6 +34,7 @@ class Card extends \yii\db\ActiveRecord
             [['card_number', 'status', 'card_type'], 'integer'],
             [['created_at', 'updated_at'], 'string', 'max' => 255],
             [['card_number'], 'unique'],
+            ['card_number','string','min'=>6],
         ];
     }
 
@@ -43,12 +44,12 @@ class Card extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'card_number' => 'Card Number',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'status' => 'Status',
-            'card_type' => 'Card Type',
+            'id' => 'شناسه',
+            'card_number' => 'شماره کارت',
+            'created_at' => 'زمان ایجاد',
+            'updated_at' => 'زمان ویرایش',
+            'status' => 'وضعیت',
+            'card_type' => 'نوع کارت',
         ];
     }
 }

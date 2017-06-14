@@ -20,10 +20,10 @@ class m170613_191527_create_game_type_table extends Migration
          $this->batchInsert('game_type', [
             'name'
         ], [
-            ['single'],
-            ['Doubles'],
-            ['Three-handed'],
-            ['Four']
+            ['تک نفره'],
+            ['دونفره'],
+            ['سه نفره'],
+            ['چهار نفره']
         ]);
     }
 

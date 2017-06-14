@@ -15,8 +15,8 @@ class m170613_183854_create_card_table extends Migration
         $this->createTable('card', [
             'id' => $this->primaryKey(),
             'card_number' => $this->integer()->unique()->notNull(),
-            'created_at' => $this->string()->notNull(),
-            'updated_at' => $this->string()->notNull(),
+            'created_at' => $this->string('20')->notNull(),
+            'updated_at' => $this->string('20')->notNull(),
             'status' => $this->boolean()->notNull(),
             'card_type' => $this->integer()->null(),
         ]);
