@@ -4,6 +4,8 @@ namespace app\controllers;
 use app\models\Card;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\helpers\ArrayHelper;
+use app\models\CardType;
 
 class CardController extends \yii\web\Controller
 {
@@ -30,13 +32,39 @@ class CardController extends \yii\web\Controller
             $cardModel->save();
            $this->redirect(['list']);
         }
+        $CardTypeItem = ArrayHelper::map(CardType::find()->asArray()->all(), 'id', 'name');
  
       return $this->render('create',[
-            'cardModel'=>$cardModel
+            'cardModel'=>$cardModel,
+          'CardTypeItem'=>$CardTypeItem
         ]);
  
         
     }
+    
+     public function actionDelete($id)
+    {
+        $cardModel= Card::findOne($id);
+        $cardModel->delete();
+        $this->redirect(['list']);
+    }
+    
+        public function actionUpdate($id)
+    {
+  
+        $cardModel= Card::findOne($id);
+        $cardModel->updated_at= time()."";
+        if ($cardModel->load(\Yii::$app->request->post()) && $cardModel->validate()){
+            $cardModel->save();
+           $this->redirect(['list']);
+        }
+      return  $this->render('update',[
+          'cardModel'=>$cardModel
+      ]);
+
+        
+    }
+    
     
     
     public function actionDetail($cnum) {

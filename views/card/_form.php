@@ -6,8 +6,8 @@ use yii\helpers\Html;
 $form= ActiveForm::begin()
 ?>
 <?= $form->field($cardModel,'card_number') ?>
+<?= $form->field($cardModel, "card_type")->dropDownList($CardTypeItem);?>
 
-<?= $form->field($cardModel,'card_type') ?>
 <?= $form->field($cardModel,'status')->checkbox() ?>
  
 <?= Html::submitButton(($cardModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-primary']) ?>
