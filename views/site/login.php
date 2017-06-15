@@ -14,7 +14,9 @@ $this->title = 'Login';
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
     <!--<p>Please fill out the following fields to login:</p>-->
-    <div class="panrl panel-info col-lg-4 col-md-4 col-lg-offset-4">
+    <div class=" col-lg-4 col-md-4 col-lg-offset-4">
+    <div class="panel panel-info">
+        
         <div class="panel-heading">ورود ب بخش مدیریت</div>
         <div class="panel-body">
             
@@ -45,6 +47,7 @@ $this->title = 'Login';
     <?php ActiveForm::end(); ?>
         </div>
     </div>
+        </div>
 
 <!--    <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
