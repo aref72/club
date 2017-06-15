@@ -64,11 +64,7 @@ $this->title = "playing";
 </div>
 <?php
 $css = "
-   #transaction-body
-   {
-        background:url('images/blue.jpg');
-        background-size: cover;
-   }
+
     #time{
         display:none;
     }

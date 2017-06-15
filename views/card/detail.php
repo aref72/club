@@ -5,6 +5,26 @@ use yii\widgets\DetailView;
 <?= DetailView::widget([
     'id' => 'detailview',
     'model' => $cardModel,
+    'attributes' => [
+        [
+            'attribute' => 'card_number'
+        ],
+        [
+            'attribute' => 'card_type',
+            'value' => $cardModel->cardType->name,
+        ],
+        [
+            'attribute' => 'created_at',
+        ],
+        [
+            'attribute' => 'updated_at'
+        ],
+        [
+            'attribute' => 'status',
+            'format'=>'raw',
+            'value' => ($cardModel->status == 1) ? '<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>'
+        ]
+    ]
 ]); ?>
 </div>
 <?php

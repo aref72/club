@@ -47,5 +47,15 @@ class TransactionController extends \yii\web\Controller
             'gameTypeItems' => $gameTypeItems,
         ]);
     }
+    public function actionList() {
+        $transactionQuery= Transaction::find();
+        $dataProvider=new \yii\data\ActiveDataProvider([
+            'query'=>$transactionQuery,
+            
+        ]);
+        return $this->render('list',[
+           'dataProvider'=>$dataProvider,
+        ]);
+    }
 
 }

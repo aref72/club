@@ -36,16 +36,16 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'خانه', 'url' => ['/site/index']],
+            ['label' => 'درباره ما', 'url' => ['/site/about']],
+            ['label' => 'گزارشات', 'url' => ['list']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'ورود', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'خروج (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -63,7 +63,16 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-
+<?php
+$css="
+       #transaction-body
+   {
+        background:url('images/blue.jpg');
+        background-size: cover;
+   }
+    ";
+$this->registerCss($css);
+?>
 
 <?php $this->endBody() ?>
 </body>

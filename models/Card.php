@@ -52,4 +52,8 @@ class Card extends \yii\db\ActiveRecord
             'card_type' => 'نوع کارت',
         ];
     }
+    
+    public function getCardType() {
+        return $this->hasOne(CardType::className(), ['id'=> 'card_type']);
+    }
 }
