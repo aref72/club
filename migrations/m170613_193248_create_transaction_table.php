@@ -17,10 +17,10 @@ class m170613_193248_create_transaction_table extends Migration
             'card_number'=> $this->integer()->notNull(),
             'game_type'=> $this->string()->notNull(),
             'price'=> $this->integer()->null(),
-            'process_type' => $this->string()->notNull(),
+            'process_type' => $this->string()->null(),
             'user_id' => $this->integer()->notNull(),
             'in_time' => $this->string()->notNull(),
-            'out_time' => $this->string()->notNull(),
+            'out_time' => $this->string()->null(),
         ]);
     }
 

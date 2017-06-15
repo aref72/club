@@ -32,7 +32,7 @@ class Transaction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['card_number', 'game_type', 'process_type', 'user_id', 'in_time', 'out_time'], 'required'],
+            [['card_number', 'game_type', 'user_id', 'in_time'], 'required'],
             [['card_number', 'price', 'user_id'], 'integer'],
             [['game_type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
             [['card_number'], 'CardNumberValidation']
@@ -63,5 +63,13 @@ class Transaction extends \yii\db\ActiveRecord
         {
             $this->addError($attribute, "کارت مورد نظر پیدا نشد");
         }
+    }
+    
+    public function clearValue() {
+        $this->card_number= null;
+        $this->game_type =null;
+        $this->price=null;
+        $this->process_type=null;
+        $this->out_time=null;
     }
 }

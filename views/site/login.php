@@ -10,12 +10,12 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+<div class="site-login" style="margin-top: 100px;">
     <!--<h1><?= Html::encode($this->title) ?></h1>-->
 
     <!--<p>Please fill out the following fields to login:</p>-->
     <div class=" col-lg-4 col-md-4 col-lg-offset-4">
-    <div class="panel panel-info">
+    <div class="panel panel-info animated bounceIn">
         
         <div class="panel-heading">ورود ب بخش مدیریت</div>
         <div class="panel-body">
@@ -54,3 +54,12 @@ $this->title = 'Login';
         To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>-->
 </div>
+   <?php
+$css="
+    #login-body{
+    background:url('images/login_back.jpg');
+    background-size:cover;
+}
+    ";
+$this->registerCss($css);
+?>
