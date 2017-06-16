@@ -5,7 +5,12 @@ use yii\helpers\Html;
 use kartik\widgets\Growl;
 $this->title = "playing";
 ?>
-<div class="row" style="margin-top: 80px;">
+<div class="row" style="margin-top: 20px;">
+    <div class="col-lg-6 col-md-6 col-md-offset-3">
+        <h2 class="text-center">خوش آمدید</h2>
+    </div>
+</div>
+<div class="row" style="margin-top: 40px;">
     <div class="col-lg-4 col-md-4 col-md-offset-2">
         <div class="panel panel-default animated flipInY">
             <div class="panel-body" id="card-detail" style="height: 365px;">
@@ -17,14 +22,15 @@ $this->title = "playing";
         
     </div>
     <div class="col-lg-4 col-md-4">
-        <div class="panel panel-info animated flipInY">
-            <div class="panel-heading">ثبت بازی</div>
+        <div class="panel panel-default animated flipInY">
+            <div class="panel-heading"><span class="glyphicon glyphicon-inbox"></span> ثبت بازی جدید</div>
             <div class="panel-body">
             <?php $form = ActiveForm::begin([
                 'id'=>'tarnsaction-form'
             ]); ?>
 
                 <?= $form->field($transactionModel, "card_number")->textInput([
+                    'placeholder' => 'شماره کارت',
                     'id' => 'card-number'
                 ]);?>
                 <?= $form->field($transactionModel, "game_type")->dropDownList($gameTypeItems);?>
@@ -32,12 +38,16 @@ $this->title = "playing";
                     'id' => 'process-type'
                 ]) ?>
                 <div id="price">
-                    <?= $form->field($transactionModel, "price");?>
+                    <?= $form->field($transactionModel, "price")->textInput([
+                        'placeholder' => 'مبلغ را وارد کنید'
+                    ]);?>
                 </div>
                 <div id="time">
-                    <?= $form->field($transactionModel, "out_time");?>
+                    <?= $form->field($transactionModel, "out_time")->textInput([
+                        'placeholder' => 'مدت زمان بازی'
+                    ]);?>
                 </div>
-                <?= Html::submitInput('ثیت', [
+                <?= Html::submitInput('ثبت بازی جدید', [
                     'class' => 'btn btn-sm btn-success'
                 ]) ?>
             <?php ActiveForm::end(); ?>
