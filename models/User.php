@@ -50,16 +50,16 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'email' => 'Email',
-            'password_hash' => 'Password Hash',
-            'status' => 'Status',
+            'id' => 'شناسه',
+            'username' => 'نام کاربری',
+            'email' => 'ایمیل',
+            'password_hash' => 'گذرواژه',
+            'status' => 'وضعیت',
             'auth_key' => 'Auth Key',
             'password_reset_token' => 'Password Reset Token',
             'account_activation_token' => 'Account Activation Token',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'زمان ایجاد',
+            'updated_at' => 'زمان ویرایش',
         ];
     }
 

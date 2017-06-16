@@ -78,4 +78,16 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'نام کاربری',
+            'password' => 'گذرواژه',
+            'rememberMe' => 'من را به یادآور'
+        ];
+    }
 }

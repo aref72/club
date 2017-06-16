@@ -1,5 +1,18 @@
+@font-face{
+	font-family:'BYekan';
+	src:url('../fonts/BYekan.eot?#') format('eot'),
+		url('../fonts/BYekan.voff') format('voff'),
+		url('../fonts/BYekan.ttf') format('truetype');
+}
+@font-face{
+	font-family:'BKoodakBold';
+	src:url('../fonts/BKoodakBold.eot?#') format('eot'),
+		url('../fonts/BKoodakBold.voff') format('voff'),
+		url('../fonts/BKoodakBold.ttf') format('truetype');
+}
 html,
 body {
+    font-family:'BKoodakBold';
     height: 100%;
 }
 
@@ -112,4 +125,8 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+#menu{
+    font-family:'BYekan';
 }

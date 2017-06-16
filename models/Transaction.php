@@ -35,7 +35,8 @@ class Transaction extends \yii\db\ActiveRecord
             [['card_number', 'game_type', 'user_id', 'in_time'], 'required'],
             [['card_number', 'price', 'user_id'], 'integer'],
             [['game_type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
-            [['card_number'], 'CardNumberValidation']
+            [['card_number'], 'CardNumberValidation'],
+            [['price'], 'priceValidation', 'skipOnEmpty' => false,]
         ];
     }
 
@@ -71,5 +72,12 @@ class Transaction extends \yii\db\ActiveRecord
         $this->price=null;
         $this->process_type=null;
         $this->out_time=null;
+    }
+    
+    public function priceValidation($attribute) {
+        if(empty($this->$attribute) && empty($this->out_time))
+        {
+            $this->addError($attribute, 'مبلغ نمی تواند خالی باشد');
+        }
     }
 }

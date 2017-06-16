@@ -34,6 +34,7 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
+        'id' => 'menu',
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [ 
             Yii::$app->user->isGuest ? (
@@ -50,7 +51,7 @@ AppAsset::register($this);
             ),
             ['label' => 'درباره ما', 'url' => ['/site/about']],
             ['label' => 'گزارشات', 'url' => ['/transaction/list']],
-            ['label' => 'خانه', 'url' => ['transaction']],
+            ['label' => 'خانه', 'url' => ['/transaction/create']],
         ],
     ]);
     NavBar::end();

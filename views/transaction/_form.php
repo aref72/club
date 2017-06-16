@@ -86,31 +86,35 @@ $css = "
     ";
 $this->registerCss($css);
 $js = "
-    $('#process-type').change(function(){
-        var check = $(this).is(':checked');
-        if(check)
-        {
-            $('#time').css('display', 'block');
-            $('#price').css('display', 'none');
-        }
-        else
-        {
-             $('#time').css('display', 'none');
-            $('#price').css('display', 'block');
-        }
-    });
+    $(document).ready(function(){
+        $('#card-number').focus();
+        $('#process-type').change(function(){
+            var check = $(this).is(':checked');
+            if(check)
+            {
+                $('#time').css('display', 'block');
+                $('#price').css('display', 'none');
+            }
+            else
+            {
+                 $('#time').css('display', 'none');
+                $('#price').css('display', 'block');
+            }
+        });
     
-    $('#card-number').change(function(){
-        var cnum = $(this).val();
-        $.ajax({
-            url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+cnum,
-        })
-        .done(function(data){
-            $('#card-detail').html(data);
-        })
-        .error(function(){
-            $('#card-detail').html('<h2 class=\'text-danger text-center\'>کارتی پیدا نشد</h2>');
+        $('#card-number').change(function(){
+            var cnum = $(this).val();
+            $.ajax({
+                url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+cnum,
+            })
+            .done(function(data){
+                $('#card-detail').html(data);
+            })
+            .error(function(){
+                $('#card-detail').html('<h2 class=\'text-danger text-center\'>کارتی پیدا نشد</h2>');
+            });
         });
     });
+    
     ";
 $this->registerJs($js);
