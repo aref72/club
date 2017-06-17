@@ -116,5 +116,12 @@ $js = "
         });
     });
     
+setInterval(function(){
+    $.ajax({
+        url:'".Yii::$app->urlManager->createAbsoluteUrl(['transaction/computing'])."'
+    }).done(function(data){
+        console.log(data);
+    });
+}, 5000);
     ";
 $this->registerJs($js);

@@ -19,10 +19,21 @@ class Utility extends Component{
     public function checkTime($models, $process_type) {
         if($process_type == 0)
         {
+            $result = [];
             foreach ($models as $model) {
-                if($model->card_type == 1)//xbox
+                if($model->card->card_type == 1)//xbox
                 {
-                    
+                    if($model->price == 1000)
+                    {
+                        $time = time() - $model->in_time;
+                        if($time >= 600 && $time <=700)
+                        {
+                            $result[] =[
+                                'card_number' => $model->card_number,
+                            ];
+                        }
+                         
+                    }
                 }
                 else if($model->card_type == 2)//ps4
                 {
@@ -33,6 +44,7 @@ class Utility extends Component{
                     
                 }
             }
+            return $result;
         }
     }
 }

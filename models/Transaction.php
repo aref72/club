@@ -87,4 +87,8 @@ class Transaction extends \yii\db\ActiveRecord
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    
+    public function getCard() {
+        return $this->hasOne(Card::className(), ['card_number' => 'card_number']);
+    }
 }
