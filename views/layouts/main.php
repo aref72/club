@@ -74,7 +74,6 @@ $css="
     ";
 $this->registerCss($css);
 ?>
-
 <?php $this->endBody() ?>
 </body>
 </html>

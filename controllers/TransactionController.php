@@ -48,7 +48,7 @@ class TransactionController extends \yii\web\Controller
         ]);
     }
     public function actionList() {
-        $transactionQuery= Transaction::find();
+        $transactionQuery= Transaction::find()->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
             'query'=>$transactionQuery,
             
@@ -56,6 +56,14 @@ class TransactionController extends \yii\web\Controller
         return $this->render('list',[
            'dataProvider'=>$dataProvider,
         ]);
+    }
+    
+    
+    public function actionComputing() {
+        $transactionModelByPrice = Transaction::find()->where(['process_type' => 0])->all();
+        Yii::$app->utility->checkTime($transactionModelByPrice, 0);
+        
+        
     }
 
 }

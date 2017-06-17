@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-
 /**
  * This is the model class for table "transaction".
  *
@@ -79,5 +78,13 @@ class Transaction extends \yii\db\ActiveRecord
         {
             $this->addError($attribute, 'مبلغ نمی تواند خالی باشد');
         }
+    }
+    
+    public function getGameType() {
+        return $this->hasOne(GameType::className(), ['id' => 'game_type']);
+    }
+    
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }
