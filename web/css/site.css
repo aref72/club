@@ -130,3 +130,7 @@ a.desc:after {
 #menu{
     font-family:'BYekan';
 }
+
+th{
+    text-align: right;
+}

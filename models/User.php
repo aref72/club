@@ -34,7 +34,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password_hash', 'status', 'auth_key', 'created_at', 'updated_at'], 'required'],
+            [['username', 'email', 'password_hash', 'status', 'auth_key', 'created_at', 'updated_at', 'level'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'email', 'password_hash', 'password_reset_token', 'account_activation_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -60,6 +60,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'account_activation_token' => 'Account Activation Token',
             'created_at' => 'زمان ایجاد',
             'updated_at' => 'زمان ویرایش',
+            'level'=>'سطح کاربر',
         ];
     }
 

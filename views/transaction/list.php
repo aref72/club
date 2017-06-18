@@ -43,6 +43,13 @@ $this->title = "لیست یازی های انجام شده";
                     ],
                     [
                         'attribute' => 'out_time'
+                    ],
+                    [
+                        'label' => 'نوع کارت',
+                        'value' => function($model)
+                        {
+                            return $model->card->cardType->name;
+                        }
                     ]
                 ]
             ])

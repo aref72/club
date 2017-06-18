@@ -5,6 +5,11 @@ $this->title='list';
 use yii\helpers\Html;
 
 ?>
+<div class="row">
+    <div class="col-lg-8 col-md-8 col-md-offset-2">
+        <div class="panel panel-default animated bounceIn">
+            <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست کاربرها</div>
+            <div class="panel-body">
 <?= Html::a('ثبت کاربر', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
@@ -12,7 +17,17 @@ use yii\helpers\Html;
         'id',
         'username',
         'email',
-        'status',
+        [
+            'attribute'=>'status',
+            'format' => 'raw',
+            'value'=> function ($model){
+                if($model->status==1)
+                {
+                    return '<span class="glyphicon glyphicon-ok"></span>';
+                }
+                return '<span class="glyphicon glyphicon-remove"></span>';
+            }
+        ],
         [
             'attribute' => 'level',
             'value' => function($model){
@@ -32,3 +47,7 @@ use yii\helpers\Html;
     ]
 ]) 
 ?>
+          </div>
+        </div>
+    </div>
+</div>
