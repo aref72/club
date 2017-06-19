@@ -3,6 +3,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\widgets\Growl;
+use yii\bootstrap\Modal;
 $this->title = "playing";
 ?>
 <div class="row" style="margin-top: 20px;">
@@ -72,7 +73,16 @@ $this->title = "playing";
     </div>
     
 </div>
+<audio id="endgame" src="audio/endgame.ogg"></audio>
+<audio id="number1" src="audio/one.ogg"></audio>
+<audio id="Alert-Atmosphere" src="audio/Alert-Atmosphere.mp3"></audio>
 <?php
+Modal::begin([
+    'id' => 'detail-exit-modal',
+    'header' => 'detail',
+]);
+echo '<div id="content-modal"></div>';
+Modal::end();
 $css = "
 
     #time{
@@ -120,7 +130,25 @@ setInterval(function(){
     $.ajax({
         url:'".Yii::$app->urlManager->createAbsoluteUrl(['transaction/computing'])."'
     }).done(function(data){
-        console.log(data);
+        for(var i=0; i< Object.keys(data).length; i++)
+        {
+            var card_number;
+            if(data[i].result == true)
+            {
+                var card_number = data[i].card_number;
+                $.ajax({
+                    url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+data[i].card_number
+                })
+                .done(function(data){
+                    var html = '<h4>زمان دستگاه با شماره کارت زیر به پایان رسید</h4>';
+                    $('#content-modal').append(html+data);
+                     $('#detail-exit-modal').modal('show');
+                     $('#endgame')[0].play();
+                     $('#Alert-Atmosphere')[0].play();
+                });
+               
+            }
+        }
     });
 }, 5000);
     ";

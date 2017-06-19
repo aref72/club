@@ -61,8 +61,8 @@ class TransactionController extends \yii\web\Controller
     
     public function actionComputing() {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $transactionModelByPrice = Transaction::find()->where(['process_type' => 0])->all();
-        $res = Yii::$app->utility->checkTime($transactionModelByPrice, 0);
+        $transactionModelByPrice = Transaction::find()->where(['process_type' => 0])->andWhere(['out_time' => ''])->all();
+        $res = Yii::$app->utility->checkTimeAndCloseGame($transactionModelByPrice, 0);
         return $res;
         
         

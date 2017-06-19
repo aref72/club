@@ -34,7 +34,7 @@ class Card extends \yii\db\ActiveRecord
             [['card_number', 'status', 'card_type'], 'integer'],
             [['created_at', 'updated_at'], 'string', 'max' => 255],
             [['card_number'], 'unique'],
-            ['card_number','string','min'=>6],
+//            ['card_number','string','min'=>6],
         ];
     }
 

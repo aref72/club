@@ -16,35 +16,41 @@ use yii\base\Component;
  */
 class Utility extends Component{
     
-    public function checkTime($models, $process_type) {
+    public function checkTimeAndCloseGame($models, $process_type) {
         if($process_type == 0)
         {
             $result = [];
-            foreach ($models as $model) {
-                if($model->card->card_type == 1)//xbox
-                {
-                    if($model->price == 1000)
+            if(!empty($models)){
+                foreach ($models as $model) {
+                    if($model->card->card_type == 1 || $model->card->card_type == 2)//xbox
                     {
-                        $time = time() - $model->in_time;
-                        if($time >= 600 && $time <=700)
+                        if($model->price == 1000)
                         {
-                            $result[] =[
-                                'card_number' => $model->card_number,
-                            ];
+                            $time = time() - $model->in_time;
+                            if($time >= 20 && $time <=25)
+                            {
+                                $model->out_time = time() + (time() - $model->in_time)."";
+                                $resSave = $model->save();
+                                $result[] =[
+                                    'result' => $resSave,
+                                    'card_number' => $model->card_number,
+                                ];
+                            }
+
                         }
-                         
                     }
-                }
-                else if($model->card_type == 2)//ps4
-                {
-                    
-                }
-                else if($model->card_type == 3)//biliard
-                {
-                    
+                    else if($model->card->card_type == 2)//ps4
+                    {
+
+                    }
+                    else if($model->card->card_type == 3)//biliard
+                    {
+
+                    }
                 }
             }
             return $result;
+            
         }
     }
 }
