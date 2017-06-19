@@ -48,7 +48,7 @@ class TransactionController extends \yii\web\Controller
         ]);
     }
     public function actionList() {
-        $transactionQuery= Transaction::find()->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
+        $transactionQuery= Transaction::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
             'query'=>$transactionQuery,
             
