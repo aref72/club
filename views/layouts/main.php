@@ -50,6 +50,7 @@ AppAsset::register($this);
                 . '</li>'
             ),
             ['label' => 'درباره ما', 'url' => ['/site/about']],
+            ['label' => 'لیست مبالغ تعیین شده', 'url' => ['/price-time/list']],
             ['label' => 'گزارشات', 'url' => ['/transaction/list']],
             ['label' => 'خانه', 'url' => ['/transaction/create']],
         ],

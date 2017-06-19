@@ -22,12 +22,25 @@ class Utility extends Component{
             $result = [];
             if(!empty($models)){
                 foreach ($models as $model) {
-                    if($model->card->card_type == 1 || $model->card->card_type == 2)//xbox
+                    if($model->card->card_type == 1)//xbox
                     {
-                        if($model->price == 1000)
+                        $time_process= null;
+                        $priceTime = \app\models\PriceTime::find()
+                                ->where([
+                                    'card_type' => $model->card->card_type,
+                                    'status' => 1,
+                                ])->all();
+                        foreach ($priceTime as $pt)
+                        {
+                            if($model->price == $pt->price)
+                            {
+                                $time_process = $pt->time*60;
+                            }
+                        }
+                        if(!empty($time_process))
                         {
                             $time = time() - $model->in_time;
-                            if($time >= 20 && $time <=25)
+                            if($time >= $time_process && ($time_process) <=$time)
                             {
                                 $model->out_time = time() + (time() - $model->in_time)."";
                                 $resSave = $model->save();
@@ -36,12 +49,11 @@ class Utility extends Component{
                                     'card_number' => $model->card_number,
                                 ];
                             }
-
                         }
                     }
                     else if($model->card->card_type == 2)//ps4
                     {
-
+                        
                     }
                     else if($model->card->card_type == 3)//biliard
                     {

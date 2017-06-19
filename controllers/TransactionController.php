@@ -51,6 +51,9 @@ class TransactionController extends \yii\web\Controller
         $transactionQuery= Transaction::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
             'query'=>$transactionQuery,
+            'pagination' => [
+                'pageSize' => 9
+            ]
             
         ]);
         return $this->render('list',[

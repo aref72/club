@@ -74,12 +74,11 @@ $this->title = "playing";
     
 </div>
 <audio id="endgame" src="audio/endgame.ogg"></audio>
-<audio id="number1" src="audio/one.ogg"></audio>
 <audio id="Alert-Atmosphere" src="audio/Alert-Atmosphere.mp3"></audio>
 <?php
 Modal::begin([
     'id' => 'detail-exit-modal',
-    'header' => 'detail',
+    'header' => 'جزییات کارت',
 ]);
 echo '<div id="content-modal"></div>';
 Modal::end();
