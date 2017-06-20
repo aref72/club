@@ -62,6 +62,7 @@ class UserController extends \yii\web\Controller
         $userModel->updated_at= time();
         $userModel->auth_key= \Yii::$app->security->generateRandomString();
         if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
+            $userModel->password_hash= \Yii::$app->security->generatePasswordHash($userModel->password_hash);
             $userModel->save();
            $this->redirect(['list']);
         }
@@ -80,6 +81,7 @@ class UserController extends \yii\web\Controller
         $userModel->updated_at= time();
         $userModel->auth_key= \Yii::$app->security->generateRandomString();
         if ($userModel->load(\Yii::$app->request->post()) && $userModel->validate()){
+            $userModel->password_hash= \Yii::$app->security->generatePasswordHash($userModel->password_hash);
             $userModel->save();
            $this->redirect(['list']);
         }

@@ -13,10 +13,10 @@ class GameController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['create'],
+                'only' => ['create','list','computing'],
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create','list','computing'],
                         'allow' => true,
                         'roles' => ['@'],
                     ]

@@ -9,6 +9,33 @@ use app\models\CardType;
 
 class CardController extends \yii\web\Controller
 {
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['list', 'create', 'update', 'delete', 'detail'],
+                'rules' => [
+                    [
+                        'actions' => ['list', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'matchCallback' => function(){
+                           if(Yii::$app->user->identity->level != 1)
+                           {
+                               return false;
+                           }
+                           return true;
+                        },
+                        'roles' => ['@']
+                    ],
+                    [
+                        'actions' => ['detail'],
+                        'allow' => true,
+                        'roles'=> ['@']
+                    ]
+                ]
+            ]
+        ];
+    }
     public function actionList()
     {
            $dataProvider= new ActiveDataProvider([

@@ -50,7 +50,7 @@ AppAsset::register($this);
                 . '</li>'
             ),
             ['label' => 'درباره ما', 'url' => ['/site/about']],
-            ['label' => 'لیست مبالغ تعیین شده', 'url' => ['/price-time/list']],
+            (Yii::$app->user->identity->level == 1) ? ['label' => 'لیست مبالغ تعیین شده', 'url' => ['/price-time/list']]: '',
             ['label' => 'گزارشات', 'url' => ['/game/list']],
             ['label' => 'خانه', 'url' => ['/game/create']],
         ],

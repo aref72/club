@@ -8,6 +8,29 @@ use yii\helpers\ArrayHelper;
 
 class PriceTimeController extends \yii\web\Controller
 {
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['create','list','update','delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create','list','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function()
+                        {
+                            if(Yii::$app->user->identity->level != 1)
+                            {
+                                return false;
+                            }
+                            return true;
+                        }
+                    ]
+                ]
+            ]
+        ];
+    }
     public function actionList()
     {
            $dataProvider= new ActiveDataProvider([
