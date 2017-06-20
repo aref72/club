@@ -20,6 +20,21 @@ class m170619_173542_create_price_time_table extends Migration
             'card_type' => $this->integer(),
             'game_type' => $this->integer(),
         ]);
+        $this->db->createCommand()->insert('price_time', [
+            'price' => 1000,
+            'time' => 1,
+            'status' => 1,
+            'card_type' => 1,
+            'game_type' => 1
+        ]);
+        
+         $this->db->createCommand()->insert('price_time', [
+            'price' => 1000,
+            'time' => 1,
+            'status' => 1,
+            'card_type' => 2,
+            'game_type' => 1
+        ]);
     }
 
     /**
