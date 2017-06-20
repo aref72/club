@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 /**
- * This is the model class for table "transaction".
+ * This is the model class for table "Game".
  *
  * @property integer $id
  * @property integer $card_number
@@ -15,14 +15,14 @@ use Yii;
  * @property string $in_time
  * @property string $out_time
  */
-class Transaction extends \yii\db\ActiveRecord
+class Game extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'transaction';
+        return 'Game';
     }
 
     /**

@@ -27,24 +27,24 @@ $this->title = "playing";
             <div class="panel-heading"><span class="glyphicon glyphicon-inbox"></span> ثبت بازی جدید</div>
             <div class="panel-body">
             <?php $form = ActiveForm::begin([
-                'id'=>'tarnsaction-form'
+                'id'=>'game-form'
             ]); ?>
 
-                <?= $form->field($transactionModel, "card_number")->textInput([
+                <?= $form->field($gameModel, "card_number")->textInput([
                     'placeholder' => 'شماره کارت',
                     'id' => 'card-number'
                 ]);?>
-                <?= $form->field($transactionModel, "game_type")->dropDownList($gameTypeItems);?>
-                <?= $form->field($transactionModel, "process_type")->checkbox([
+                <?= $form->field($gameModel, "game_type")->dropDownList($gameTypeItems);?>
+                <?= $form->field($gameModel, "process_type")->checkbox([
                     'id' => 'process-type'
                 ]) ?>
                 <div id="price">
-                    <?= $form->field($transactionModel, "price")->textInput([
+                    <?= $form->field($gameModel, "price")->textInput([
                         'placeholder' => 'مبلغ را وارد کنید'
                     ]);?>
                 </div>
                 <div id="time">
-                    <?= $form->field($transactionModel, "out_time")->textInput([
+                    <?= $form->field($gameModel, "out_time")->textInput([
                         'placeholder' => 'مدت زمان بازی'
                     ]);?>
                 </div>

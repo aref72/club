@@ -5,14 +5,14 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `transaction`.
  */
-class m170613_193248_create_transaction_table extends Migration
+class m170613_193248_create_game_table extends Migration
 {
     /**
      * @inheritdoc
      */
     public function up()
     {
-        $this->createTable('transaction', [
+        $this->createTable('game', [
             'id' => $this->primaryKey(),
             'card_number'=> $this->integer()->notNull(),
             'game_type'=> $this->string()->notNull(),
@@ -29,6 +29,6 @@ class m170613_193248_create_transaction_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('transaction');
+        $this->dropTable('game');
     }
 }

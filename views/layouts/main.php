@@ -24,7 +24,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap" id="transaction-body">
+<div class="wrap" id="game-body">
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -51,8 +51,8 @@ AppAsset::register($this);
             ),
             ['label' => 'درباره ما', 'url' => ['/site/about']],
             ['label' => 'لیست مبالغ تعیین شده', 'url' => ['/price-time/list']],
-            ['label' => 'گزارشات', 'url' => ['/transaction/list']],
-            ['label' => 'خانه', 'url' => ['/transaction/create']],
+            ['label' => 'گزارشات', 'url' => ['/game/list']],
+            ['label' => 'خانه', 'url' => ['/game/create']],
         ],
     ]);
     NavBar::end();
@@ -67,7 +67,7 @@ AppAsset::register($this);
 </div>
 <?php
 $css="
-       #transaction-body
+       #game-body
    {
         background:url('images/blue.jpg');
         background-size: cover;

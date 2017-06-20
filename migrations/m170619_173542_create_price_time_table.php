@@ -18,6 +18,7 @@ class m170619_173542_create_price_time_table extends Migration
             'time' => $this->integer(),
             'status' => $this->boolean(),
             'card_type' => $this->integer(),
+            'game_type' => $this->integer(),
         ]);
     }
 

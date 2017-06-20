@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Transaction;
+use app\models\Game;
 use app\models\GameType;
 use yii\helpers\ArrayHelper;
 
-class TransactionController extends \yii\web\Controller
+class GameController extends \yii\web\Controller
 {
     public function behaviors() {
         return [
@@ -26,14 +26,14 @@ class TransactionController extends \yii\web\Controller
     }
     public function actionCreate()
     {
-        $transactionModel = new Transaction();
-        $transactionModel->in_time = time()."";
-        $transactionModel->user_id = Yii::$app->user->id;
-        if($transactionModel->load(Yii::$app->request->post()) && $transactionModel->validate())
+        $gameModel = new Game();
+        $gameModel->in_time = time()."";
+        $gameModel->user_id = Yii::$app->user->id;
+        if($gameModel->load(Yii::$app->request->post()) && $gameModel->validate())
         {
-            if($transactionModel->save())
+            if($gameModel->save())
             {
-                $transactionModel->clearValue();
+                $gameModel->clearValue();
                 Yii::$app->session->setFlash('success', 'باموفقیت ثبت شد');
             }
             else{
@@ -43,12 +43,12 @@ class TransactionController extends \yii\web\Controller
         
         $gameTypeItems = ArrayHelper::map(GameType::find()->asArray()->all(), 'id', 'name');
         return $this->render('_form', [
-            'transactionModel' => $transactionModel,
+            'gameModel' => $gameModel,
             'gameTypeItems' => $gameTypeItems,
         ]);
     }
     public function actionList() {
-        $transactionQuery= Transaction::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
+        $transactionQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
             'query'=>$transactionQuery,
             'pagination' => [
@@ -64,8 +64,8 @@ class TransactionController extends \yii\web\Controller
     
     public function actionComputing() {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $transactionModelByPrice = Transaction::find()->where(['process_type' => 0])->andWhere(['out_time' => ''])->all();
-        $res = Yii::$app->utility->checkTimeAndCloseGame($transactionModelByPrice, 0);
+        $gameModelByPrice = Game::find()->where(['process_type' => 0])->andWhere(['out_time' => ''])->all();
+        $res = Yii::$app->utility->checkTimeAndCloseGame($gameModelByPrice, 0);
         return $res;
         
         
