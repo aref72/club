@@ -85,8 +85,10 @@ class CardController extends \yii\web\Controller
             $cardModel->save();
            $this->redirect(['list']);
         }
+        $CardTypeItem = ArrayHelper::map(CardType::find()->asArray()->all(), 'id', 'name');
       return  $this->render('update',[
-          'cardModel'=>$cardModel
+          'cardModel'=>$cardModel,
+          'CardTypeItem'=>$CardTypeItem
       ]);
 
         

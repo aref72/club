@@ -26,6 +26,12 @@ class GameController extends \yii\web\Controller
     }
     public function actionCreate()
     {
+//        $myfile = fopen("C:/xampp/apache/manual/vhosts/log.txt", "w") or die("Unable to open file!");
+//$txt = "John Doe\n";
+//fwrite($myfile, $txt);
+//$txt = "Jane Doe\n";
+//fwrite($myfile, $txt);
+//fclose($myfile);
         $gameModel = new Game();
         $gameModel->setScenario('create');
         $gameModel->in_time = time()."";

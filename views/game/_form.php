@@ -78,7 +78,7 @@ $this->title = "playing";
 <?php
 Modal::begin([
     'id' => 'detail-exit-modal',
-    'header' => 'جزییات کارت',
+    'header' => 'جزییات دستگاه',
 ]);
 echo '<div id="content-modal"></div>';
 Modal::end();
@@ -139,7 +139,7 @@ setInterval(function(){
                     url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+data[i].card_number
                 })
                 .done(function(data){
-                    var html = '<h4>زمان دستگاه با شماره کارت زیر به پایان رسید</h4>';
+                    var html = '<h4>زمان دستگاه با شماره زیر به پایان رسید</h4>';
                     $('#content-modal').append(html+data);
                      $('#detail-exit-modal').modal('show');
                      $('#endgame')[0].play();
