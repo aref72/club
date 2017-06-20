@@ -13,6 +13,7 @@ $this->title = "ایجاد مبلغ بصورت دستی";
                 <?= $this->render('_form', [
                     'priceTimeModel' => $priceTimeModel,
                     'cardTypeItems' => $cardTypeItems,
+                    'gameTypeItems'=> $gameTypeItems,
                 ]);?>
             </div>
         </div>

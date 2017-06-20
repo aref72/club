@@ -30,9 +30,11 @@ class PriceTimeController extends \yii\web\Controller
            $this->redirect(['list']);
         }
         $cardTypeItems = ArrayHelper::map(\app\models\CardType::find()->asArray()->all(), 'id', 'name');
+        $gameTypeItems = ArrayHelper::map(\app\models\GameType::find()->asArray()->all(), 'id', 'name');
         return $this->render('create',[
             'priceTimeModel'=>$priceTimeModel,
             'cardTypeItems' => $cardTypeItems,
+            'gameTypeItems' => $gameTypeItems,
         ]);
  
         
