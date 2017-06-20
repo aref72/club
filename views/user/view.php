@@ -15,9 +15,7 @@ use yii\widgets\DetailView;
         [
             'attribute'=>'email'
         ],
-        [
-            'attribute'=>'password_hash'
-        ],
+
         
         [
             'attribute' => 'level',
