@@ -97,7 +97,7 @@ class UserController extends \yii\web\Controller
         {
             throw new \yii\web\HttpException("user not found", 404);
         }
-         return $this->renderAjax('view', [
+         return $this->render('view', [
             'userModel' => $userModel
         ]);
         
