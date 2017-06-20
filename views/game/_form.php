@@ -127,7 +127,7 @@ $js = "
     
 setInterval(function(){
     $.ajax({
-        url:'".Yii::$app->urlManager->createAbsoluteUrl(['transaction/computing'])."'
+        url:'".Yii::$app->urlManager->createAbsoluteUrl(['game/computing'])."'
     }).done(function(data){
         for(var i=0; i< Object.keys(data).length; i++)
         {
