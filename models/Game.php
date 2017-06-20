@@ -8,7 +8,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $card_number
- * @property string $game_type
+ * @property string $type
  * @property integer $price
  * @property string $process_type
  * @property integer $user_id
@@ -31,9 +31,9 @@ class Game extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['card_number', 'game_type', 'user_id', 'in_time'], 'required'],
+            [['card_number', 'type', 'user_id', 'in_time'], 'required'],
             [['card_number', 'price', 'user_id'], 'integer'],
-            [['game_type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
+            [['type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
             [['card_number'], 'CardNumberValidation'],
             [['price'], 'priceValidation', 'skipOnEmpty' => false,]
         ];
@@ -47,7 +47,7 @@ class Game extends \yii\db\ActiveRecord
         return [
             'id' => 'شناسه',
             'card_number' => 'شماره کارت',
-            'game_type' => 'نوع بازی',
+            'type' => 'نوع بازی',
             'price' => 'مبلغ',
             'process_type' => 'براساس زمان',
             'user_id' => 'شناسه کاربر',
@@ -67,7 +67,7 @@ class Game extends \yii\db\ActiveRecord
     
     public function clearValue() {
         $this->card_number= null;
-        $this->game_type =null;
+        $this->type =null;
         $this->price=null;
         $this->process_type=null;
         $this->out_time=null;
@@ -81,7 +81,7 @@ class Game extends \yii\db\ActiveRecord
     }
     
     public function getGameType() {
-        return $this->hasOne(GameType::className(), ['id' => 'game_type']);
+        return $this->hasOne(GameType::className(), ['id' => 'type']);
     }
     
     public function getUser() {

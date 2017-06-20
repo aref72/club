@@ -28,7 +28,7 @@ class PriceTime extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'time', 'status', 'card_type'], 'required'],
+            [['price', 'time', 'status', 'card_type', 'game_type'], 'required'],
             [['price', 'time', 'status', 'card_type'], 'integer'],
         ];
     }

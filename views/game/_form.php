@@ -34,7 +34,7 @@ $this->title = "playing";
                     'placeholder' => 'شماره کارت',
                     'id' => 'card-number'
                 ]);?>
-                <?= $form->field($gameModel, "game_type")->dropDownList($gameTypeItems);?>
+                <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems);?>
                 <?= $form->field($gameModel, "process_type")->checkbox([
                     'id' => 'process-type'
                 ]) ?>
