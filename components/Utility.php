@@ -28,6 +28,7 @@ class Utility extends Component{
                         $priceTime = \app\models\PriceTime::find()
                                 ->where([
                                     'card_type' => $model->card->card_type,
+                                    'game_type' => $model->type,
                                     'status' => 1,
                                 ])->all();
                         foreach ($priceTime as $pt)

@@ -149,6 +149,6 @@ setInterval(function(){
             }
         }
     });
-}, 5000);
+}, 2000);
     ";
 $this->registerJs($js);

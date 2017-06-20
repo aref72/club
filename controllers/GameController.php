@@ -27,6 +27,7 @@ class GameController extends \yii\web\Controller
     public function actionCreate()
     {
         $gameModel = new Game();
+        $gameModel->setScenario('create');
         $gameModel->in_time = time()."";
         $gameModel->user_id = Yii::$app->user->id;
         if($gameModel->load(Yii::$app->request->post()) && $gameModel->validate())
@@ -48,9 +49,10 @@ class GameController extends \yii\web\Controller
         ]);
     }
     public function actionList() {
-        $transactionQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
+        $gamePriceSum = Game::find()->where(['not',['price' =>null]])->andWhere(['!=', 'out_time', ''])->sum('price');
+        $gameQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
-            'query'=>$transactionQuery,
+            'query'=>$gameQuery,
             'pagination' => [
                 'pageSize' => 9
             ]
@@ -58,6 +60,7 @@ class GameController extends \yii\web\Controller
         ]);
         return $this->render('list',[
            'dataProvider'=>$dataProvider,
+           'gamePriceSum' => $gamePriceSum,
         ]);
     }
     

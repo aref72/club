@@ -35,7 +35,8 @@ class Game extends \yii\db\ActiveRecord
             [['card_number', 'price', 'user_id'], 'integer'],
             [['type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
             [['card_number'], 'CardNumberValidation'],
-            [['price'], 'priceValidation', 'skipOnEmpty' => false,]
+            [['price'], 'priceValidation', 'skipOnEmpty' => false,],
+            [['card_number'], 'cardNumberExitsValidation', 'on' => 'create']
         ];
     }
 
@@ -77,6 +78,14 @@ class Game extends \yii\db\ActiveRecord
         if(empty($this->$attribute) && empty($this->out_time))
         {
             $this->addError($attribute, 'مبلغ نمی تواند خالی باشد');
+        }
+    }
+    
+    public function cardNumberExitsValidation($attribute) {
+        $res = Game::find()->where(['card_number' => $this->$attribute])->andWhere(['or', ['out_time' => ''], ['price' => null]])->exists();
+        if($res)
+        {
+            $this->addError($attribute, 'این دستگاه رزو شده است');
         }
     }
     

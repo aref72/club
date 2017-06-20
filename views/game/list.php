@@ -18,7 +18,7 @@ $this->title = "لیست یازی های انجام شده";
                         ]
                     ],
                     [
-                        'attribute' => 'game_type',
+                        'attribute' => 'type',
                         'options' => [
                             'width' => '120px'
                         ],
@@ -54,6 +54,9 @@ $this->title = "لیست یازی های انجام شده";
                 ]
             ])
             ?>
+            <div>
+                مجموع در آمد ها : <?= $gamePriceSum ?> تومن 
+            </div>
             </div>
         </div>
     </div>
