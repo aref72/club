@@ -90,5 +90,16 @@ class UserController extends \yii\web\Controller
  
         
     }
-
+    
+    public function actionView($id) {
+        $userModel = User::find()->where(['id'=>$id])->one();
+         if(!isset($userModel))
+        {
+            throw new \yii\web\HttpException("user not found", 404);
+        }
+         return $this->renderAjax('view', [
+            'userModel' => $userModel
+        ]);
+        
+    }
 }
