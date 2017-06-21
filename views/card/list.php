@@ -5,9 +5,9 @@ $this->title='لیست کارت ها';
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">
         <div class="panel panel-default animated bounceIn">
-            <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست کارت ها</div>
+            <div class="panel-heading"><i class="fa fa-id-card-o fa-fw" aria-hidden="true"></i> لیست کارت ها</div>
             <div class="panel-body">
-<?= Html::a('ثبت کارت', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
+<?= Html::a('<i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i> ثبت کارت جدید', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
     'columns'=>[

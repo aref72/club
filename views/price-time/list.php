@@ -7,9 +7,9 @@ $this->title = "لیست مبالغ بصورت دستی";
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">
         <div class="panel panel-default animated bounceIn">
-            <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست مبالغ بصورت دستی</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-list fa-fw"></span> لیست مبالغ بصورت دستی</div>
             <div class="panel-body">
-                <?= Html::a('ثبت مبلغ جدید', 
+                <?= Html::a('<span class="fa fa-dollar fa-fw"></span>ثبت مبلغ جدید', 
                     Url::to(['create']), [
                     'class' => 'btn btn-sm btn-success'
                 ]) ?>
