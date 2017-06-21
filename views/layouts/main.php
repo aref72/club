@@ -51,6 +51,8 @@ AppAsset::register($this);
             ),
             ['label' => 'درباره ما', 'url' => ['/site/about']],
             (Yii::$app->user->identity->level == 1) ? ['label' => 'لیست مبالغ تعیین شده', 'url' => ['/price-time/list']]: '',
+            (Yii::$app->user->identity->level == 1) ? ['label' => 'کارت ها', 'url' => ['/card/list']]: '',
+            (Yii::$app->user->identity->level == 1) ? ['label' => 'کاربرها', 'url' => ['/user/list']]: '',
             ['label' => 'گزارشات', 'url' => ['/game/list']],
             ['label' => 'خانه', 'url' => ['/game/create']],
         ],

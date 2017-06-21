@@ -5,10 +5,10 @@ use yii\helpers\Html;
 <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($priceTimeModel, "price"); ?>
     <?= $form->field($priceTimeModel, "time"); ?>
-    <?= $form->field($priceTimeModel, "card_type")->dropDownList($gameTypeItems, [
+    <?= $form->field($priceTimeModel, "card_type")->dropDownList($cardTypeItems, [
         'prompt' => '--select-item--'
     ]); ?>
-    <?= $form->field($priceTimeModel, "game_type")->dropDownList($cardTypeItems, [
+    <?= $form->field($priceTimeModel, "game_type")->dropDownList($gameTypeItems, [
         'prompt' => '--select-item--'
     ]); ?>
     <?= $form->field($priceTimeModel, "status")->checkbox(); ?>
