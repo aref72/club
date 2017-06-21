@@ -44,7 +44,7 @@ class PriceTime extends \yii\db\ActiveRecord
             'time' => 'زمان',
             'status' => 'وضعیت',
             'card_type' => 'نوع دستگاه',
-            'game_type' => 'نوع بازی'
+            'game_type' => 'نوع بازی',
         ];
     }
 }
