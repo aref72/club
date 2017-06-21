@@ -100,6 +100,7 @@ class Game extends \yii\db\ActiveRecord
     public function getCard() {
         return $this->hasOne(Card::className(), ['card_number' => 'card_number']);
     }
+
        
     
  

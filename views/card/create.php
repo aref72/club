@@ -1,5 +1,5 @@
 <?php
-$this->title='CreateCard';
+$this->title='ایجاد کارت جدید';
 ?>
 
 <div class="row">

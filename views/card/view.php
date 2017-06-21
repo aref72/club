@@ -1,4 +1,7 @@
 <?php
+$this->title='جزئیات کارت';
+?>
+<?php
     use yii\widgets\DetailView;
 ?>
 <div style="padding:60px 10px 0px 10px;">

@@ -113,7 +113,7 @@ class CardController extends \yii\web\Controller
         {
             throw new \yii\web\HttpException("card not found", 404);
         }
-        return $this->renderAjax('view', [
+        return $this->render('view', [
             'cardModel' => $cardModel
         ]);
     }

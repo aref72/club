@@ -1,5 +1,5 @@
 <?php
-$this->title='CardList';
+$this->title='لیست کارت ها';
 ?>
 <?php use yii\helpers\Html; ?>
 <div class="row">

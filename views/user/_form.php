@@ -13,7 +13,7 @@ $form= ActiveForm::begin()
 ]); ?>
 <?= $form->field($userModel,'status')->checkbox() ?>
  
-<?= Html::submitButton(($userModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-primary']) ?>
+<?= Html::submitButton(($userModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-success']) ?>
    
 <?php ActiveForm::end();
 ?>

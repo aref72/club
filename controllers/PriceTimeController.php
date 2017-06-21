@@ -74,19 +74,30 @@ class PriceTimeController extends \yii\web\Controller
     {
   
         $priceTimeModel= PriceTime::findOne($id);
-        $priceTimeModel->updated_at= time()."";
+//        $priceTimeModel->updated_at= time()."";
         if ($priceTimeModel->load(\Yii::$app->request->post()) && $priceTimeModel->validate()){
             $priceTimeModel->save();
            $this->redirect(['list']);
         }
+        $cardTypeItems = ArrayHelper::map(\app\models\CardType::find()->asArray()->all(), 'id', 'name');
+        $gameTypeItems = ArrayHelper::map(\app\models\GameType::find()->asArray()->all(), 'id', 'name');
       return  $this->render('update',[
-          'cardModel'=>$priceTimeModel
-      ]);
-
-        
+          'priceTimeModel'=>$priceTimeModel,
+          'cardTypeItems' => $cardTypeItems,
+          'gameTypeItems' => $gameTypeItems,
+      ]);  
     }
     
-    
+        public function actionView($id) {
+        $priceTimeModel = PriceTime::find()->where(['id' => $id])->one();
+        if(!isset($priceTimeModel))
+        {
+            throw new \yii\web\HttpException("card not found", 404);
+        }
+        return $this->render('view', [
+            'priceTimeModel' => $priceTimeModel
+        ]);
+    }
     
  
 
