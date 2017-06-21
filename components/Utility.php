@@ -22,44 +22,34 @@ class Utility extends Component{
             $result = [];
             if(!empty($models)){
                 foreach ($models as $model) {
-                    if($model->card->card_type == 1)//xbox
+                    
+                    $time_process= null;
+                    $priceTime = \app\models\PriceTime::find()
+                            ->where([
+                                'card_type' => $model->card->card_type,
+                                'game_type' => $model->type,
+                                'status' => 1,
+                            ])->all();
+                    foreach ($priceTime as $pt)
                     {
-                        $time_process= null;
-                        $priceTime = \app\models\PriceTime::find()
-                                ->where([
-                                    'card_type' => $model->card->card_type,
-                                    'game_type' => $model->type,
-                                    'status' => 1,
-                                ])->all();
-                        foreach ($priceTime as $pt)
+                        if($model->price == $pt->price)
                         {
-                            if($model->price == $pt->price)
-                            {
-                                $time_process = $pt->time*60;
-                            }
-                        }
-                        if(!empty($time_process))
-                        {
-                            $time = time() - $model->in_time;
-                            if($time >= $time_process && ($time_process) <=$time)
-                            {
-                                $model->out_time = time() + (time() - $model->in_time)."";
-                                $resSave = $model->save();
-                                $result[] =[
-                                    'result' => $resSave,
-                                    'card_number' => $model->card_number,
-                                ];
-                            }
+                            $time_process = $pt->time*60;
                         }
                     }
-                    else if($model->card->card_type == 2)//ps4
+                    if(!empty($time_process))
                     {
-                        
-                    }
-                    else if($model->card->card_type == 3)//biliard
-                    {
-
-                    }
+                        $time = time() - $model->in_time;
+                        if($time >= $time_process && ($time_process) <=$time)
+                        {
+                            $model->out_time = time() + (time() - $model->in_time)."";
+                            $resSave = $model->save();
+                            $result[] =[
+                                'result' => $resSave,
+                                'card_number' => $model->card_number,
+                            ];
+                        }
+                    } 
                 }
             }
             return $result;
