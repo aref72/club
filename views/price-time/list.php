@@ -18,8 +18,45 @@ $this->title = "لیست مبالغ بصورت دستی";
                     شما دراین بخش می توانید مبلغ و مدت زمان بازی را در سیستم کلوب اضافه کنید.
                 </h4>
             <?= GridView::widget([
-                'dataProvider' => $dataProvider
-            ]); ?>
+                 'dataProvider' => $dataProvider,
+                    'columns'=>[
+                      [  
+                          'attribute'=>'id'
+                      ],
+                      [
+                          'attribute'=>'price'
+                      ],
+                      [
+                          'attribute'=>'time'
+                      ],  
+                      [
+                          'attribute' => 'status',
+                          'format'=>'raw',
+                           'value'=> function ($model){
+                           if($model->status==1)
+                           {
+                              return '<span class="glyphicon glyphicon-ok"></span>';
+                            }
+                              return '<span class="glyphicon glyphicon-remove"></span>';
+                           }
+                      ],
+                      [  
+                          'attribute'=>'card_type',
+                            'value'=> function ($model){
+                              return $model->cardType->name;
+                             }
+                      ],
+                      [  
+                          'attribute'=>'game_type',
+                            'value'=> function ($model){
+                              return $model->gameType->name;
+                             }
+                      ],
+                      [
+                           'class'=> '\yii\grid\ActionColumn'
+                      ]
+                    ],
+             ]); ?>
             </div>
         </div>
     </div>

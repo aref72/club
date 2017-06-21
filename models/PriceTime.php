@@ -47,4 +47,11 @@ class PriceTime extends \yii\db\ActiveRecord
             'game_type' => 'نوع بازی',
         ];
     }
+      public function getCardType() {
+        return $this->hasOne(CardType::className(), ['id'=> 'card_type']);
+    }
+      public function getGameType() {
+         return $this->hasOne(GameType::className(), ['id'=> 'game_type']);
+    }
+
 }

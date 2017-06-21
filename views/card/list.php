@@ -11,12 +11,35 @@ $this->title='CardList';
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
     'columns'=>[
-        'id',
-        'card_number',
-        'created_at',
-        'updated_at',
-        'status',
-        'card_type',
+        [
+            'attribute'=>'id',
+        ],
+        [
+            'attribute'=>'card_number',
+        ],
+        [
+            'attribute'=>'created_at',
+        ],
+        [
+            'attribute'=>'updated_at',
+        ],
+        [
+            'attribute'=>'status',
+             'format' => 'raw',
+            'value'=> function ($model){
+                if($model->status==1)
+                {
+                    return '<span class="glyphicon glyphicon-ok"></span>';
+                }
+                return '<span class="glyphicon glyphicon-remove"></span>';
+            }
+        ],
+        [
+            'attribute'=>'card_type',
+            'value'=> function ($model){
+                return $model->cardType->name;
+            }
+        ],
        [
            'class'=> '\yii\grid\ActionColumn'
        ]

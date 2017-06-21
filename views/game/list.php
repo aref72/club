@@ -1,6 +1,6 @@
 <?php
 use yii\grid\GridView;
-$this->title = "لیست بازی های انجام شده";
+$this->title = "لیست یازی های انجام شده";
 ?>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">
@@ -48,7 +48,7 @@ $this->title = "لیست بازی های انجام شده";
                         'label' => 'نوع کارت',
                         'value' => function($model)
                         {
-                            return $model->card->cardType->name;
+                            return $model->cardType->name;
                         }
                     ]
                 ]

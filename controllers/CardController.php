@@ -106,5 +106,16 @@ class CardController extends \yii\web\Controller
             'cardModel' => $cardModel
         ]);
     }
+    
+        public function actionView($id) {
+        $cardModel = Card::find()->where(['id' => $id])->one();
+        if(!isset($cardModel))
+        {
+            throw new \yii\web\HttpException("card not found", 404);
+        }
+        return $this->renderAjax('view', [
+            'cardModel' => $cardModel
+        ]);
+    }
 
 }
