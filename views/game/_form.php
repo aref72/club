@@ -4,7 +4,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
-$this->title = "playing";
+$this->title = "ثبت بازی جدید";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row" style="margin-top: 20px;">
     <div class="col-lg-6 col-md-6 col-md-offset-3">

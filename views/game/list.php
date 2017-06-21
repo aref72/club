@@ -48,7 +48,7 @@ $this->title = "لیست یازی های انجام شده";
                         'label' => 'نوع کارت',
                         'value' => function($model)
                         {
-                            return $model->cardType->name;
+                            return $model->card->cardType->name;
                         }
                     ]
                 ]
