@@ -4,6 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
+use kartik\widgets\Select2;
 $this->title = "ثبت بازی جدید";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -40,8 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id' => 'process-type'
                 ]) ?>
                 <div id="price">
-                    <?= $form->field($gameModel, "price")->textInput([
-                        'placeholder' => 'مبلغ را وارد کنید'
+                    <?= $form->field($gameModel, "price")->widget(Select2::className(), [
+                        'options' => ['placeholder' => '--انتخاب مبلغ--'],
+                        'data' => $priceItems,
                     ]);?>
                 </div>
                 <div id="time">
