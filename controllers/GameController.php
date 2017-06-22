@@ -52,6 +52,9 @@ class GameController extends \yii\web\Controller
     }
     public function actionList() {
         $gamePriceSum = Game::find()->where(['not',['price' =>null]])->andWhere(['!=', 'out_time', ''])->sum('price');
+        $day = time('Y-m-d');
+//        die(var_dump($day));
+        $datPrice = Game::find()->where(['in_time' => '']);
         $gameQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $dataProvider=new \yii\data\ActiveDataProvider([
             'query'=>$gameQuery,

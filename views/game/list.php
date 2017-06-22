@@ -1,6 +1,7 @@
 <?php
 use yii\grid\GridView;
 $this->title = "لیست یازی های انجام شده";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">

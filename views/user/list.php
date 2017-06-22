@@ -1,5 +1,6 @@
 <?php
-$this->title='list';
+$this->title='لیست کاربران';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
 use yii\helpers\Html;

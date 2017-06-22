@@ -1,5 +1,6 @@
 <?php
 $this->title='جزئیات کارت';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
     use yii\widgets\DetailView;

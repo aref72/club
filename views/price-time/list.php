@@ -2,7 +2,8 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-$this->title = "لیست مبالغ بصورت دستی";
+$this->title = "لیست مبالغ ";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">

@@ -1,5 +1,6 @@
 <?php
-$this->title='create';
+$this->title='ایجاد کاربرجدید';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">

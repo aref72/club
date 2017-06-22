@@ -1,7 +1,8 @@
 <?php
+use yii\helpers\Html;
 $this->title='لیست کارت ها';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php use yii\helpers\Html; ?>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">
         <div class="panel panel-default animated bounceIn">

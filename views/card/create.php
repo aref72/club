@@ -1,5 +1,6 @@
 <?php
 $this->title='ایجاد کارت جدید';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">

@@ -1,5 +1,6 @@
 <?php
 $this->title='جزئیات مبالغ تعیین شده';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
     use yii\widgets\DetailView;
