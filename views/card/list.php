@@ -20,9 +20,25 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute'=>'created_at',
+            'format' => 'raw',
+            'value' => function($model){
+                $date = Yii::$app->utility->convertDate([
+                    'to' => 'persian',
+                    'time' => $model->created_at,
+                ]);
+                return '<p>'.$date['year'].'/'.$date['month_num'].'/'.$date['day'].'</p>'.$date['hour'].':'.$date['minute'].':'.$date['second'];
+            }
         ],
         [
             'attribute'=>'updated_at',
+            'format' => 'raw',
+            'value' => function($model){
+                $date = Yii::$app->utility->convertDate([
+                    'to' => 'persian',
+                    'time' => $model->updated_at,
+                ]);
+                return '<p>'.$date['year'].'/'.$date['month_num'].'/'.$date['day'].'</p>'.$date['hour'].':'.$date['minute'].':'.$date['second'];
+            }
         ],
         [
             'attribute'=>'status',
