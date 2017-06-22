@@ -6,6 +6,7 @@ use Yii;
 use app\models\Game;
 use app\models\GameType;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 class GameController extends \yii\web\Controller
 {
@@ -88,6 +89,31 @@ class GameController extends \yii\web\Controller
         return $res;
         
         
+    }
+    
+    public function actionGameTypeList() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $game_type = $parents[0];
+                
+                $card_number = $_POST['depdrop_all_params']['card-number'];
+                $cardModel = \app\models\Card::find()->where(['card_number' => $card_number])->one();
+                if(isset($cardModel)){
+                $out = \app\models\PriceTime::find()->select(['id', 'name' => 'price'])->where(['game_type' => $game_type, 'card_type' => $cardModel->cardType->id])->asArray()->all(); 
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+                }
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
     }
 
 }

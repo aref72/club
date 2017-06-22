@@ -36,15 +36,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'placeholder' => 'شماره کارت',
                     'id' => 'card-number'
                 ]);?>
-                <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems);?>
+                <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems,[
+                    'prompt' => '--انتخاب نوع بازی--',
+                    'id' => 'input-price'  
+                    ])?>
                 <?= $form->field($gameModel, "process_type")->checkbox([
                     'id' => 'process-type'
                 ]) ?>
                 <div id="price">
-                    <?= $form->field($gameModel, "price")->widget(Select2::className(), [
-                        'options' => ['placeholder' => '--انتخاب مبلغ--'],
-                        'data' => $priceItems,
-                    ]);?>
+                    <?= $form->field($gameModel, "price")->widget(kartik\widgets\DepDrop::className(),[
+                    'data' => $priceItems,
+                    'options' => ['placeholder' => 'Select ...'],
+                    'type' => kartik\widgets\DepDrop::TYPE_SELECT2,
+                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                    'pluginOptions' => [
+                        'url' => yii\helpers\Url::to(['game-type-list']),
+                        'depends' => ['input-price'],
+                        'params'=>['card-number']
+                    ]
+                ]);;?>
                 </div>
                 <div id="time">
                     <?= $form->field($gameModel, "out_time")->textInput([
