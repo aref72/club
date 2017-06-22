@@ -101,7 +101,7 @@ class GameController extends \yii\web\Controller
                 $card_number = $_POST['depdrop_all_params']['card-number'];
                 $cardModel = \app\models\Card::find()->where(['card_number' => $card_number])->one();
                 if(isset($cardModel)){
-                $out = \app\models\PriceTime::find()->select(['id', 'name' => 'price'])->where(['game_type' => $game_type, 'card_type' => $cardModel->cardType->id])->asArray()->all(); 
+                $out = \app\models\PriceTime::find()->select(['id' => 'price', 'name' => 'price'])->where(['game_type' => $game_type, 'card_type' => $cardModel->cardType->id])->asArray()->all(); 
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:
                 // [
