@@ -19,6 +19,17 @@ class GameController extends \yii\web\Controller
                         'actions' => ['create','list','computing'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function(){
+                            //security
+                            $myfile = fopen("c:/xampp/apache/manual/compute.txt", "r") or die("Unable to open file!");
+                            $res = fread($myfile,filesize("c:/xampp/apache/manual/compute.txt"));
+                            fclose($myfile);
+                            if($res == 0)
+                            {
+                                Yii::$app->controller->redirect(['site/index']);
+                            }
+                            return true;
+                        }
                     ]
                 ]
             ]

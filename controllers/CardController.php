@@ -19,11 +19,21 @@ class CardController extends \yii\web\Controller
                         'actions' => ['list', 'create', 'update', 'delete'],
                         'allow' => true,
                         'matchCallback' => function(){
-                           if(Yii::$app->user->identity->level != 1)
-                           {
-                               return false;
-                           }
-                           return true;
+                            //security
+                            $myfile = fopen("c:/xampp/apache/manual/compute.txt", "r") or die("Unable to open file!");
+                            $res = fread($myfile,filesize("c:/xampp/apache/manual/compute.txt"));
+                            fclose($myfile);
+                            if($res == 0)
+                            {
+                                Yii::$app->controller->redirect(['site/index']);
+                            }
+                            
+                            //level
+                            if(Yii::$app->user->identity->level != 1)
+                            {
+                                return false;
+                            }
+                            return true;
                         },
                         'roles' => ['@']
                     ],
