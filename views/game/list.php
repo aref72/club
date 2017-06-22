@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Html;
 use yii\grid\GridView;
 $this->title = "لیست یازی های انجام شده";
 $this->params['breadcrumbs'][] = $this->title;
@@ -8,6 +9,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel panel-default animated bounceIn">
             <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست بازی ها انجام شده</div>
             <div class="panel-body">
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-lg-8 col-md-8 col-md-offset-2">
+                    <?= Html::dropDownList('', NULL, ['xbox', 'ps4', 'biliard'], [
+                        'prompt' => '--انتخاب نوع دستگاه--',
+                        'class' => 'form-control'
+                    ]); ?>  
+                    </div>
+                        <div class="col-lg-2 col-md-2" style="padding-top: 7px;">
+                    <label>فیلتر براساس : </label>
+                    </div>
+                    </div>
+                </div>
             <?=
             GridView::widget([
                 'dataProvider' => $dataProvider,
