@@ -12,9 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <div class="row">
                     <div class="col-lg-8 col-md-8 col-md-offset-2">
-                    <?= Html::dropDownList('', NULL, ['xbox', 'ps4', 'biliard'], [
+                    <?= Html::dropDownList('', NULL, [1=> 'xbox', 2=> 'ps4', 3=> 'biliard'], [
                         'prompt' => '--انتخاب نوع دستگاه--',
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'onchange' => 'cardtypeChange(this); return false;'
                     ]); ?>  
                     </div>
                         <div class="col-lg-2 col-md-2" style="padding-top: 7px;">
@@ -76,3 +77,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<script>
+    function cardtypeChange(obj){
+        var filter = $(obj).val();
+        console.log($(obj));
+        window.location = "<?= Yii::$app->urlManager->createAbsoluteUrl(['game/list']) ?>&filter_cardtype="+filter;
+        return false;
+    }
+</script>

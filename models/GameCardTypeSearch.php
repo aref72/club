@@ -14,7 +14,7 @@ namespace app\models;
  * @author asus
  */
 class GameCardTypeSearch extends Game{
-    public $cardType;
+    public $filter_cardtype;
     
     public function search($params) {
         $gameQuery = static::find();
