@@ -13,15 +13,26 @@ namespace app\models;
  *
  * @author asus
  */
-class GameCardTypeSearch extends Game{
+class GameCardTypeSearch extends \yii\base\Model{
     public $filter_cardtype;
     
+    public function rules() {
+        return [
+            [['filter_cardtype'], 'safe']
+        ];
+    }
     public function search($params) {
-        $gameQuery = static::find();
+        $gameQuery = Game::find()->joinWith(['card']);
         
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query'=>$gameQuery
         ]);
+        $model['GameCardTypeSearch']['filter_cardtype'] = $params['filter_cardtype'];
+        if(!$this->load($model) && $this->validate())
+        {
+            return $dataProvider;
+        }
+        $gameQuery->andFilterWhere(['LIKE', 'card.card_type', $this->filter_cardtype]);
         return $dataProvider;
         
         

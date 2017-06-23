@@ -63,7 +63,15 @@ class GameController extends \yii\web\Controller
         ]);
     }
     public function actionList() {
-        $gamePriceSum = Game::find()->where(['not',['price' =>null]])->andWhere(['!=', 'out_time', ''])->sum('price');
+        $gamePriceQuery = Game::find()
+                ->joinWith('card')
+                ->where(['not',['price' =>null]])
+                ->andWhere(['!=', 'out_time', '']);
+        if(isset($_GET['filter_cardtype']))
+        {
+            $gamePriceQuery->andwhere(['card.card_type' => $_GET['filter_cardtype']]);
+        }
+        $gamePriceSum= $gamePriceQuery->sum('price');
         $datPrice = Game::find()->where(['in_time' => '']);
         $gameQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
         $gameCardTypeSearchModel = new \app\models\GameCardTypeSearch();
@@ -71,6 +79,7 @@ class GameController extends \yii\web\Controller
         return $this->render('list',[
            'dataProvider'=>$dataProvider,
            'gamePriceSum' => $gamePriceSum,
+            'gameCardTypeSearchModel' => $gameCardTypeSearchModel,
         ]);
     }
     

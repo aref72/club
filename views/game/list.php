@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\grid\GridView;
-$this->title = "لیست یازی های انجام شده";
+use yii\widgets\ActiveForm;
+$this->title = "لیست بازی های انجام شده";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -12,11 +13,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <div class="row">
                     <div class="col-lg-8 col-md-8 col-md-offset-2">
-                    <?= Html::dropDownList('', NULL, [1=> 'xbox', 2=> 'ps4', 3=> 'biliard'], [
-                        'prompt' => '--انتخاب نوع دستگاه--',
-                        'class' => 'form-control',
-                        'onchange' => 'cardtypeChange(this); return false;'
-                    ]); ?>  
+                        <?php $form = ActiveForm::begin(); ?>
+                            <?= $form->field($gameCardTypeSearchModel, 'filter_cardtype',[
+                                'template' => '{input}',
+                            ])->dropDownList([1=> 'xbox', 2=> 'ps4', 3=> 'biliard'],[
+                                'prompt' => '--انتخاب نوع دستگاه--',
+                                'class' => 'form-control',
+                                'onchange' => 'cardtypeChange(this); return false;'
+                            ])->label(''); ?>
+                        <?php ActiveForm::end(); ?>
                     </div>
                         <div class="col-lg-2 col-md-2" style="padding-top: 7px;">
                     <label>فیلتر براساس : </label>
