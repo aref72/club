@@ -74,12 +74,12 @@ class GameController extends \yii\web\Controller
         $gamePriceSum= $gamePriceQuery->sum('price');
         $datPrice = Game::find()->where(['in_time' => '']);
         $gameQuery= Game::find()->joinWith(['gameType', 'card', 'user', 'card.cardType'])->where(['and', ['!=', 'out_time', ''], ['!=', 'price', '']]);
-        $gameCardTypeSearchModel = new \app\models\GameCardTypeSearch();
-        $dataProvider=$gameCardTypeSearchModel->search(Yii::$app->request->queryParams);
+        $gameSearchModel = new \app\models\GameSearch();
+        $dataProvider=$gameSearchModel->search(Yii::$app->request->queryParams);
         return $this->render('list',[
            'dataProvider'=>$dataProvider,
            'gamePriceSum' => $gamePriceSum,
-            'gameCardTypeSearchModel' => $gameCardTypeSearchModel,
+            'gameSearchModel' => $gameSearchModel,
         ]);
     }
     
