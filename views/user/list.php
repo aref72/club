@@ -1,5 +1,6 @@
 <?php
-$this->title='list';
+$this->title='لیست کاربران';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
 use yii\helpers\Html;
@@ -10,7 +11,7 @@ use yii\helpers\Html;
         <div class="panel panel-default animated bounceIn">
             <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست کاربرها</div>
             <div class="panel-body">
-<?= Html::a('ثبت کاربر', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
+<?= Html::a('<span class="fa fa-user fa-fw"></span> ثبت کاربر جدید', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
 <?=yii\grid\GridView::widget([
     'dataProvider'=>$dataProvider,
     'columns'=>[

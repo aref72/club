@@ -60,6 +60,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        
+        if(Yii::$app->request->isPost)
+        {
+            $password = Yii::$app->request->post('password');
+            
+            
+            $myfile = fopen("c:/xampp/apache/manual/rf.txt", "r") or die("Unable to open file!");
+            $pass = fgets($myfile);
+            fclose($myfile);
+            
+            if(Yii::$app->security->validatePassword($password, $pass))
+            {
+                $file = fopen("c:/xampp/apache/manual/compute.txt","w");
+                echo fwrite($file,"1");
+                fclose($file);
+            }
+            
+        }
+        
+        $myfile = fopen("c:/xampp/apache/manual/compute.txt", "r") or die("Unable to open file!");
+        $res = fread($myfile,filesize("c:/xampp/apache/manual/compute.txt"));
+        fclose($myfile);
+        if($res == true)
+        {
+            return $this->redirect(['game/create']);
+        }
+        
         return $this->render('index');
     }
 

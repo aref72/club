@@ -17,18 +17,11 @@ $this->title = 'Login';
     <div class=" col-lg-4 col-md-4 col-lg-offset-4">
     <div class="panel panel-info animated bounceIn">
         
-        <div class="panel-heading">ورود ب بخش مدیریت</div>
+        <div class="panel-heading"><span class="glyphicon glyphicon-log-in"></span> ورود به بخش مدیریت</div>
         <div class="panel-body">
             
 
-    <?php $form = ActiveForm::begin([
-//        'id' => 'login-form',
-//        'layout' => 'horizontal',
-//        'fieldConfig' => [
-//            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-//            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-//        ],
-    ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
@@ -39,20 +32,13 @@ $this->title = 'Login';
         ]) ?>
 
         <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('ورود', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
+            <?= Html::submitButton('ورود', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>
         </div>
     </div>
         </div>
-
-<!--    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </div>-->
 </div>
    <?php
 $css="

@@ -10,7 +10,7 @@ $form= ActiveForm::begin()
 
 <?= $form->field($cardModel,'status')->checkbox() ?>
  
-<?= Html::submitButton(($cardModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-primary']) ?>
+<?= Html::submitButton(($cardModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-success']) ?>
    
 <?php ActiveForm::end();
 ?>

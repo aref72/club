@@ -1,4 +1,8 @@
 <?php
+$this->title='جزئیات کاربر';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<?php
 use yii\widgets\DetailView;
 ?>
 <div style="padding:60px 10px 0px 10px;">
@@ -19,7 +23,16 @@ use yii\widgets\DetailView;
         
         [
             'attribute' => 'level',
-    //            'value' => $userModel,
+             'value' => function($model){
+                if($model->level == 1)
+                {
+                    return "مدیر";
+                }
+                else if($model->level == 2)
+                {
+                    return "کاربر";
+                }
+            }
         ],
         [
             'attribute' => 'created_at',

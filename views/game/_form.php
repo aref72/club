@@ -4,7 +4,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\widgets\Growl;
 use yii\bootstrap\Modal;
-$this->title = "playing";
+use kartik\widgets\Select2;
+$this->title = "ثبت بازی جدید";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row" style="margin-top: 20px;">
     <div class="col-lg-6 col-md-6 col-md-offset-3">
@@ -34,14 +36,25 @@ $this->title = "playing";
                     'placeholder' => 'شماره کارت',
                     'id' => 'card-number'
                 ]);?>
-                <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems);?>
+                <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems,[
+                    'prompt' => '--انتخاب نوع بازی--',
+                    'id' => 'input-price'  
+                    ])?>
                 <?= $form->field($gameModel, "process_type")->checkbox([
                     'id' => 'process-type'
                 ]) ?>
                 <div id="price">
-                    <?= $form->field($gameModel, "price")->textInput([
-                        'placeholder' => 'مبلغ را وارد کنید'
-                    ]);?>
+                    <?= $form->field($gameModel, "price")->widget(kartik\widgets\DepDrop::className(),[
+                    'data' => $priceItems,
+                    'options' => ['placeholder' => 'Select ...'],
+                    'type' => kartik\widgets\DepDrop::TYPE_SELECT2,
+                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                    'pluginOptions' => [
+                        'url' => yii\helpers\Url::to(['game-type-list']),
+                        'depends' => ['input-price'],
+                        'params'=>['card-number']
+                    ]
+                ]);;?>
                 </div>
                 <div id="time">
                     <?= $form->field($gameModel, "out_time")->textInput([

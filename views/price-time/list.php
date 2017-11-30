@@ -2,14 +2,15 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-$this->title = "لیست مبالغ بصورت دستی";
+$this->title = "لیست مبالغ ";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-md-offset-2">
         <div class="panel panel-default animated bounceIn">
-            <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> لیست مبالغ بصورت دستی</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-list fa-fw"></span> لیست مبالغ بصورت دستی</div>
             <div class="panel-body">
-                <?= Html::a('ثبت مبلغ جدید', 
+                <?= Html::a('<span class="fa fa-dollar fa-fw"></span>ثبت مبلغ جدید', 
                     Url::to(['create']), [
                     'class' => 'btn btn-sm btn-success'
                 ]) ?>
@@ -18,8 +19,45 @@ $this->title = "لیست مبالغ بصورت دستی";
                     شما دراین بخش می توانید مبلغ و مدت زمان بازی را در سیستم کلوب اضافه کنید.
                 </h4>
             <?= GridView::widget([
-                'dataProvider' => $dataProvider
-            ]); ?>
+                 'dataProvider' => $dataProvider,
+                    'columns'=>[
+                      [  
+                          'attribute'=>'id'
+                      ],
+                      [
+                          'attribute'=>'price'
+                      ],
+                      [
+                          'attribute'=>'time'
+                      ],  
+                      [
+                          'attribute' => 'status',
+                          'format'=>'raw',
+                           'value'=> function ($model){
+                           if($model->status==1)
+                           {
+                              return '<span class="glyphicon glyphicon-ok"></span>';
+                            }
+                              return '<span class="glyphicon glyphicon-remove"></span>';
+                           }
+                      ],
+                      [  
+                          'attribute'=>'card_type',
+                            'value'=> function ($model){
+                              return $model->cardType->name;
+                             }
+                      ],
+                      [  
+                          'attribute'=>'game_type',
+                            'value'=> function ($model){
+                              return $model->gameType->name;
+                             }
+                      ],
+                      [
+                           'class'=> '\yii\grid\ActionColumn'
+                      ]
+                    ],
+             ]); ?>
             </div>
         </div>
     </div>
