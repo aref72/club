@@ -13,9 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
     'dataProvider'=>$dataProvider,
     'columns'=>[
         [
-            'attribute'=>'id',
-        ],
-        [
             'attribute'=>'card_number',
         ],
         [

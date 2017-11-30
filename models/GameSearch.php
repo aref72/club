@@ -31,7 +31,7 @@ class GameSearch extends Game{
         $array = [];
         $gameQuery = Game::find()->joinWith(['gameType', 'user', 'card.cardType']);
         
-//        die(var_dump($gameQuery->createCommand()->rawSql));
+
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query'=>$gameQuery
         ]);
@@ -63,7 +63,7 @@ class GameSearch extends Game{
                 ->andFilterWhere(['LIKE', 'game_type.name', $this->game_type])
                 ->andFilterWhere(['LIKE', 'user.username', $this->username])
                 ->andFilterWhere(['LIKE', 'card_type.name', $this->card_type]);
-//        die(var_dump($gameQuery->createCommand()->rawSql));
+        
         $array= [
             'comulativeDataProvider' => $this->comulative($gameQuery),//مبلغ تجمعی با فبلتر
             'dataProvider' => $dataProvider,
@@ -73,9 +73,12 @@ class GameSearch extends Game{
     
     public function comulative(\yii\db\ActiveQuery $activeQuery) {
         $activeQuery = clone $activeQuery;
-        $data = $activeQuery->select([
-            'price' => 'SUM(price)'
-        ]);
+        $activeQuery->select([
+            'price' => 'SUM(price)',
+            'user_id'
+        ])
+        ->joinWith('user')
+        ->groupBy('user_id');
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $activeQuery,
         ]);

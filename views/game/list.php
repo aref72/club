@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             <?=
             GridView::widget([
-                'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider['dataProvider'],
                 'filterModel' => $gameSearchModel,
                 'columns' => [
                     [
@@ -52,9 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' => [
                             'width' => '150px'
                         ],
-                        'filter' => DatePicker::widget([
-                            'name' => $gameSearchModel->in_time
-                        ]),
+                        
                         'value' => function($model){
                             $date = Yii::$app->utility->convertDate([
                                 'to' => 'persian',
@@ -90,6 +88,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
             <div>
                 مجموع در آمد ها : <?= $gamePriceSum ?> تومن 
+                <hr>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider['comulativeDataProvider'],
+                    'columns' => [
+                        'price',
+                        [
+                            'attribute' => 'username',
+                            'label' => 'نام کاربری',
+                            'value' => function($model){
+                                return $model->user->username;
+                            }
+                        ]
+                    ]
+                ]) ?>
             </div>
             </div>
         </div>
