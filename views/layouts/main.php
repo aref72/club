@@ -61,7 +61,7 @@ AppAsset::register($this);
                 ],
                 
             ],
-            ['label' => 'خانه', 'url' => ['/game/create']],
+            ['label' => 'خانه', 'url' => ['/game/create-game-out-time']],
         ],
     ]);
     NavBar::end();

@@ -26,7 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-lg-4 col-md-4">
         <div class="panel panel-default animated flipInY">
-            <div class="panel-heading"><span class="glyphicon glyphicon-inbox"></span> ثبت بازی جدید</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-inbox"></span> 
+                ثبت بازی جدید
+                <a href="<?= yii\helpers\Url::to(['create-game-out-time']) ?>" class="btn btn-xs btn-info">بصورت کارت</a>
+            </div>
             <div class="panel-body">
             <?php $form = ActiveForm::begin([
                 'id'=>'game-form'
@@ -108,60 +111,68 @@ $css = "
     ";
 $this->registerCss($css);
 $js = "
-    $(document).ready(function(){
-        $('#card-number').focus();
-        $('#process-type').change(function(){
-            var check = $(this).is(':checked');
-            if(check)
-            {
-                $('#time').css('display', 'block');
-                $('#price').css('display', 'none');
-            }
-            else
-            {
-                 $('#time').css('display', 'none');
-                $('#price').css('display', 'block');
-            }
-        });
-    
-        $('#card-number').change(function(){
-            var cnum = $(this).val();
-            $.ajax({
-                url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+cnum,
-            })
-            .done(function(data){
-                $('#card-detail').html(data);
-            })
-            .error(function(){
-                $('#card-detail').html('<h2 class=\'text-danger text-center\'>کارتی پیدا نشد</h2>');
-            });
-        });
-    });
-    
-setInterval(function(){
-    $.ajax({
-        url:'".Yii::$app->urlManager->createAbsoluteUrl(['game/computing'])."'
-    }).done(function(data){
-        for(var i=0; i< Object.keys(data).length; i++)
+$(document).ready(function(){
+    $('#card-number').focus();
+    $('#process-type').change(function(){
+        var check = $(this).is(':checked');
+        if(check)
         {
-            var card_number;
-            if(data[i].result == true)
-            {
-                var card_number = data[i].card_number;
-                $.ajax({
-                    url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+data[i].card_number
-                })
-                .done(function(data){
-                    var html = '<h4>زمان دستگاه با شماره زیر به پایان رسید</h4>';
-                    $('#content-modal').append(html+data);
-                     $('#detail-exit-modal').modal('show');
-                     $('#endgame')[0].play();
-                     $('#Alert-Atmosphere')[0].play();
-                });
-               
-            }
+            $('#time').css('display', 'block');
+            $('#price').css('display', 'none');
+        }
+        else
+        {
+             $('#time').css('display', 'none');
+            $('#price').css('display', 'block');
         }
     });
-}, 2000);
+
+    $('#card-number').change(function(){
+        var cnum = $(this).val();
+        $.ajax({
+            url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+cnum,
+        })
+        .done(function(data){
+            $('#card-detail').html(data);
+        })
+        .error(function(){
+            $('#card-detail').html('<h2 class=\'text-danger text-center\'>کارتی پیدا نشد</h2>');
+        });
+    });
+});
+
+check();
+function check(){
+    $.ajax({
+        url:'".Yii::$app->urlManager->createAbsoluteUrl(['ajax/computing'])."'
+    }).done(function(returnData){
+        if(returnData.result == true)
+        {
+            var data = returnData.data;
+            for(var i=0; i< Object.keys(data).length; i++)
+            {
+                var card_number;
+                if(data[i].result == true)
+                {
+                    var card_number = data[i].card_number;
+                    $.ajax({
+                        url:'".Yii::$app->urlManager->createAbsoluteUrl(['card/detail'])."&cnum='+data[i].card_number
+                    })
+                    .done(function(data){
+                        var html = '<h4>زمان دستگاه با شماره زیر به پایان رسید</h4>';
+                        $('#content-modal').append(html+data);
+                         $('#detail-exit-modal').modal('show');
+                         $('#endgame')[0].play();
+                         $('#Alert-Atmosphere')[0].play();
+                    });
+
+                }
+            }
+        }
+        else{
+            check();
+        }
+    });    
+}
     ";
-$this->registerJs($js);
+$this->registerJs($js, \yii\web\View::POS_END);

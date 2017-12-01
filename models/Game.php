@@ -33,10 +33,11 @@ class Game extends \yii\db\ActiveRecord
         return [
             [['card_number', 'type', 'user_id', 'in_time'], 'required'],
             [['card_number', 'price', 'user_id'], 'integer'],
-            [['type', 'process_type', 'in_time', 'out_time'], 'string', 'max' => 255],
+            [['type', 'in_time', 'out_time'], 'string', 'max' => 255],
             [['card_number'], 'CardNumberValidation'],
-            [['price'], 'priceValidation', 'skipOnEmpty' => false,],
-            [['card_number'], 'cardNumberExitsValidation', 'on' => 'create']
+            [['price'], 'priceValidation', 'skipOnEmpty' => false, 'on' => 'create'],
+            [['card_number'], 'cardNumberExitsValidation','on' => 'create'],
+            [['card_number', 'type', 'in_time', 'user_id', 'process_type',],'required', 'on' => 'create_out_time']
         ];
     }
 

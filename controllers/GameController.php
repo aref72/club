@@ -62,6 +62,39 @@ class GameController extends \yii\web\Controller
             'priceItems' =>$priceItems,
         ]);
     }
+    
+    
+    public function actionCreateGameOutTime()
+    {
+        $gameModel = new Game();
+        $gameModel->setScenario('create_out_time');
+        $gameModel->in_time = time()."";
+        $gameModel->user_id = Yii::$app->user->id;
+        $gameModel->process_type = 3;//with out time
+        if($gameModel->load(Yii::$app->request->post()) && $gameModel->validate())
+        {
+            if($gameModel->save())
+            {
+                $gameModel->clearValue();
+                Yii::$app->session->setFlash('success', 'باموفقیت ثبت شد');
+            }
+            else{
+                Yii::$app->session->setFlash('success', 'متاسفانه ثبت نشد. دوباره تلاش کنید');
+            }
+        } 
+        
+        $exitGameModel = new \app\models\ExitGame();
+        if($exitGameModel->load(Yii::$app->request->post()) && $exitGameModel->validate())
+        {
+            $exitGameModel->exitCard();
+        }
+        $gameTypeItems = ArrayHelper::map(GameType::find()->asArray()->all(), 'id', 'name');
+        return $this->render('create_game_out_time', [
+            'gameModel' => $gameModel,
+            'gameTypeItems' => $gameTypeItems,
+            'exitGameModel' => $exitGameModel,
+        ]);
+    }
     public function actionList() {
         $gamePriceQuery = Game::find()
                 ->joinWith('card')
@@ -84,14 +117,7 @@ class GameController extends \yii\web\Controller
     }
     
     
-    public function actionComputing() {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $gameModelByPrice = Game::find()->where(['process_type' => 0])->andWhere(['out_time' => ''])->all();
-        $res = Yii::$app->utility->checkTimeAndCloseGame($gameModelByPrice, 0);
-        return $res;
-        
-        
-    }
+    
     
     public function actionGameTypeList() {
         $out = [];

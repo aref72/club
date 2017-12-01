@@ -1,4 +1,5 @@
 <?php
+use kartik\grid\GridView;
 use yii\helpers\Html;
 $this->title='لیست کارت ها';
 $this->params['breadcrumbs'][] = $this->title;
@@ -9,8 +10,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel-heading"><i class="fa fa-id-card-o fa-fw" aria-hidden="true"></i> لیست کارت ها</div>
             <div class="panel-body">
 <?= Html::a('<i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i> ثبت کارت جدید', yii\helpers\Url::to(['create']),['class'=>'btn btn-success']) ?>
-<?=yii\grid\GridView::widget([
+<?= GridView::widget([
     'dataProvider'=>$dataProvider,
+    'toolbar'=>[
+        '{export}',
+        '{toggleData}'
+    ],
     'columns'=>[
         [
             'attribute'=>'card_number',

@@ -13,6 +13,9 @@ $config = [
         'account' => [
             'class' => 'app\modules\account\Module',
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ]
     ],
     'components' => [
         'utility' => [
