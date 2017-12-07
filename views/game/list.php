@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'game_type',
+                        'label' => 'نوع بازی',
                         'filter' => yii\helpers\ArrayHelper::map(app\models\GameType::find()->asArray()->all(), 'name', 'name'),
                         'options' => [
                             'width' => '120px'
@@ -42,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'username',
+                        'label' => 'نام کاربری',
                         'filter' => yii\helpers\ArrayHelper::map(\app\modules\account\models\User::find()->asArray()->all(), 'username', 'username'),
                         'value'=> function($model){
                             return $model->user->username;
@@ -87,19 +89,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ])
             ?>
             <div>
-                مجموع در آمد ها : <?= $gamePriceSum ?> تومن 
+                مجموع در آمد ها : <?= number_format($gamePriceSum) ?> تومن 
                 <hr>
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider['comulativeDataProvider'],
                     'columns' => [
-                        'price',
+                        [
+                            'attribute' => 'price',
+                            'value' => function($model){
+                                return number_format($model->price).' تومان';
+                            }
+                        ],
                         [
                             'attribute' => 'username',
                             'label' => 'نام کاربری',
                             'value' => function($model){
                                 return $model->user->username;
                             }
-                        ]
+                        ],
+                        
                     ]
                 ]) ?>
             </div>

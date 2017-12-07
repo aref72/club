@@ -46,11 +46,36 @@ class ExitGame extends \yii\base\Model{
         {
             $this->addError('card_number', "این کارت وارد نشده است");
         }
-        $gameModel->out_time= time().'';
-        $time = ($gameModel->out_time - $gameModel->in_time) / 60;
+        else
+        {
         
-        $gameModel->price = 1000;
-        $gameModel->save();
+        
+            $gameModel->out_time= time().'';
+            $hour = ($gameModel->out_time - $gameModel->in_time) / 60 /60;
+
+            $priceModel = PriceTime::find()->where(['card_type' => $gameModel->card->card_type])->all();
+//            foreach ($priceModel as $price) 
+//            {
+//                if($hour < $price->time)
+//                {
+//                    $gameModel->price = 10;
+//                }
+//            }
+            if($hour < 0.5)
+            {
+                $gameModel->price = 10;
+            }
+            else if($hour == 1 || $hour > 1)
+            {
+                $gameModel->price = 2000 * $hour;
+            }
+            
+            if($gameModel->save())
+            {
+                return $gameModel;
+            }
+            return false;
+        }
         
     }
 }

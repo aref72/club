@@ -14,10 +14,10 @@ class GameController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['create','list','computing'],
+                'only' => ['create','list','computing', 'create-game-out-time'],
                 'rules' => [
                     [
-                        'actions' => ['create','list','computing'],
+                        'actions' => ['create','list','computing', 'create-game-out-time'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function(){
@@ -82,17 +82,25 @@ class GameController extends \yii\web\Controller
                 Yii::$app->session->setFlash('success', 'متاسفانه ثبت نشد. دوباره تلاش کنید');
             }
         } 
+        $gameTypeItems = ArrayHelper::map(GameType::find()->asArray()->all(), 'id', 'name');
         
         $exitGameModel = new \app\models\ExitGame();
+        $exitData = null;
         if($exitGameModel->load(Yii::$app->request->post()) && $exitGameModel->validate())
         {
-            $exitGameModel->exitCard();
+            ;
+            if($result = $exitGameModel->exitCard()){
+                return Yii::$app->utility->renderPjax('callbackPjax', [
+                    'data' => $result, 
+                ]);
+            }
         }
-        $gameTypeItems = ArrayHelper::map(GameType::find()->asArray()->all(), 'id', 'name');
+        
         return $this->render('create_game_out_time', [
             'gameModel' => $gameModel,
             'gameTypeItems' => $gameTypeItems,
             'exitGameModel' => $exitGameModel,
+            'exitData' => $exitData
         ]);
     }
     public function actionList() {
@@ -142,6 +150,15 @@ class GameController extends \yii\web\Controller
             }
         }
         echo Json::encode(['output'=>'', 'selected'=>'']);
+    }
+    
+    
+    public function actionDetailGame($gid)
+    {
+        $gameModel = Game::findOne($gid);
+        return $this->renderAjax('_detail_game', [
+            'gameModel' => $gameModel,
+        ]);
     }
 
 }

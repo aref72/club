@@ -122,5 +122,11 @@ class Utility extends Component {
             return $newDate;
         }
     }
-
+    
+    public function renderPjax($callback, $data = []) {
+        $dataJson = \yii\helpers\Json::encode($data);
+        if(is_string($callback)){
+            return '<script>'.$callback.'('.$dataJson.'); </script>';
+        }
+    }
 }

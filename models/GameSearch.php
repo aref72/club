@@ -29,7 +29,8 @@ class GameSearch extends Game{
      */
     public function search($params) {
         $array = [];
-        $gameQuery = Game::find()->joinWith(['gameType', 'user', 'card.cardType']);
+        $gameQuery = Game::find()->joinWith(['gameType', 'user', 'card.cardType'])
+                ->orderBy('game.id desc');
         
 
         $dataProvider = new \yii\data\ActiveDataProvider([

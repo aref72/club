@@ -5,7 +5,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
     use yii\widgets\DetailView;
 ?>
-<div style="padding:60px 10px 0px 10px;">
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-md-offset-1">
+        <div class="panel panel-default animated bounceIn">
+            <div class="panel-heading"><span class="glyphicon glyphicon-list"></span> جزییات</div>
+            <div class="panel-body">
 <?=
     DetailView::widget([
          'id'=>'detailview',
@@ -39,8 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ]
     ]);?>
-
+     <?= yii\helpers\Html::a('برگشت <i class="glyphicon glyphicon-arrow-left"></i>', yii\helpers\Url::to(['list']), [
+        'class' => 'btn btn-sm btn-primary',
+        'style' => 'margin-right:10px;'
+    ]); ?> 
     </div>
+        </div>
+    </div>
+</div>
 <?php
 $css="
     #detailview{

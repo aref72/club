@@ -14,6 +14,9 @@ $form= ActiveForm::begin()
 <?= $form->field($userModel,'status')->checkbox() ?>
  
 <?= Html::submitButton(($userModel->isNewRecord) ? 'ایجاد':'ویرایش', ['class' => 'btn btn-sm btn-success']) ?>
-   
+<?= yii\helpers\Html::a('برگشت <i class="glyphicon glyphicon-arrow-left"></i>', yii\helpers\Url::to(['list']), [
+        'class' => 'btn btn-sm btn-primary',
+        'style' => 'margin-right:10px;'
+    ]); ?> 
 <?php ActiveForm::end();
 ?>

@@ -37,6 +37,7 @@ class Game extends \yii\db\ActiveRecord
             [['card_number'], 'CardNumberValidation'],
             [['price'], 'priceValidation', 'skipOnEmpty' => false, 'on' => 'create'],
             [['card_number'], 'cardNumberExitsValidation','on' => 'create'],
+            [['card_number'], 'cardNumberExitsValidation','on' => 'create_out_time'],
             [['card_number', 'type', 'in_time', 'user_id', 'process_type',],'required', 'on' => 'create_out_time']
         ];
     }
@@ -54,7 +55,7 @@ class Game extends \yii\db\ActiveRecord
             'process_type' => 'براساس زمان',
             'user_id' => 'شناسه کاربر',
             'in_time' => 'زمان ورود',
-            'out_time' => 'مدت زمان',
+            'out_time' => 'زمان خروج',
         ];
     }
     

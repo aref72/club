@@ -84,7 +84,7 @@ class SiteController extends Controller
         fclose($myfile);
         if($res == true)
         {
-            return $this->redirect(['game/create']);
+            return $this->redirect(['game/create-game-out-time']);
         }
         
         return $this->render('index');

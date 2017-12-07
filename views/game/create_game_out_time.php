@@ -2,6 +2,9 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use kartik\widgets\Growl;
+use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
+$this->title = "ثبت یازی";
 ?>
 
 <div class="row" style="margin-top: 20px;">
@@ -35,7 +38,6 @@ use kartik\widgets\Growl;
                     'id' => 'card-number'
                 ]);?>
                 <?= $form->field($gameModel, "type")->dropDownList($gameTypeItems,[
-                    'prompt' => '--انتخاب نوع بازی--',
                     'id' => 'input-price'  
                     ])?>
                 <?= Html::submitInput('ثبت بازی جدید', [
@@ -65,9 +67,15 @@ use kartik\widgets\Growl;
                 خروج دستی
             </div>
             <div class="panel-body">
-                <?php $form = ActiveForm::begin(); ?>
+                <?php Pjax::begin(['id' => 'exitgame-pjax','enablePushState' => false, 'timeout' => false]); ?>
+                <?php $form = ActiveForm::begin([
+                    'options' => [
+                        'data-pjax' => true
+                    ]
+                ]); ?>
                     <?= $form->field($exitGameModel, "card_number"); ?>
                 <?php ActiveForm::end(); ?>
+                <?php Pjax::end(); ?>
             </div>
         </div>
     </div>
@@ -103,6 +111,42 @@ $(document).ready(function(){
         });
     });
 });
+
+function callbackPjax(data)
+{
+
+    $.pjax.reload({
+        container:'#exitgame-pjax',
+        push:false,
+        timeout:false,
+        replace:false
+    });
+
+    $('#game-modal').modal('show');
+   
+    setTimeout(function(){ 
+        $.pjax.reload({
+            container:'#game-modal-pjax',
+            url:'".Yii::$app->urlManager->createAbsoluteUrl(['game/detail-game'])."&gid='+data.data.id,
+            push:false,
+            timeout:false,
+            replace:false
+        });
+    }, 1000);    
+    
+    
+}
 ";
 $this->registerJs($js, \yii\web\View::POS_END);
+
+Modal::begin([
+    'id' => 'game-modal',
+]);
+Pjax::begin(['id' => 'game-modal-pjax', 'enablePushState' => false, 'timeout' => false]);
+Pjax::end();
+Modal::end();
+
 ?>
+
+
+
